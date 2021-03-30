@@ -1,0 +1,75 @@
+version: "3.8"
+networks:
+  my-network:
+    driver: bridge
+services:
+
+  #################################
+  # appt
+  #################################
+  appt:
+    hostname: apptcontainer
+    image: borenlew/appt:g1t6_v2
+    restart: always
+    ports: 
+    - "5100:5000"
+    environment:
+      dbURL: mysql+mysqlconnector://root@host.docker.internal:3306/g1t6_appt
+    networks:
+      - my-network
+
+  ###############################################
+  # doctor 
+  ###############################################
+  doctor:
+    hostname: doctorcontainer
+    image: borenlew/doctor:g1t6_v2
+    restart: always
+    ports: 
+    - "5200:5000"
+    environment:
+      dbURL: mysql+mysqlconnector://root@host.docker.internal:3306/g1t6_doctor
+    networks:
+      - my-network
+
+  ###############################################
+  # patient 
+  ###############################################
+  patient:
+    image: borenlew/patient:g1t6_v2
+    restart: always
+    ports: 
+    - "5500:5000"
+    environment:
+      dbURL: mysql+mysqlconnector://root@host.docker.internal:3306/g1t6_patient
+
+  ###############################################
+  # prescription 
+  ###############################################
+  prescription:
+    image: borenlew/prescription:g1t6_v2
+    restart: always
+    ports: 
+    - "5300:5000"
+    environment:
+      dbURL: mysql+mysqlconnector://root@host.docker.internal:3306/g1t6_prescription
+
+  ###############################################
+  # bookingappt 
+  ###############################################
+  bookingappt:
+    image: borenlew/bookingappt:g1t6_v2
+    restart: always
+    ports: 
+    - "5400:5000"
+    depends_on:
+      - appt
+      - doctor
+      - patient
+      - prescription
+    networks:
+      - my-network
+
+
+
+

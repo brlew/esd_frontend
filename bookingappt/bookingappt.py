@@ -12,12 +12,13 @@ app = Flask(__name__)
 CORS(app)
 
 #prescription_URL = "http://localhost:5000/prescription"
-appt_URL = "http://localhost:5100/appt/"
-doctor_URL = "http://localhost:5200/doctor"
+appt_URL = "http://apptcontainer:5100/appt/"
+doctor_URL = "http://doctorcontainer:5200/doctor/"
 
 # To Run
 # python bookingappt.py 
-
+# docker build -t borenlew/bookingappt:g1t6_v2 ./
+# docker run -p 5400:5000 borenlew/bookingappt:g1t6_v2
 
 @app.route("/bookingappt/", methods=['POST'])
 def bookingappt():
@@ -92,11 +93,12 @@ def findDoctorAvailability():
     print('doctoravail_result:', doctoravail_result)
 
     code = doctoravail_result["code"]
+    # code = 200
 
     if code not in range(200, 300):
         return {
             "code": 400,
-            "message": "Doctor is not available at this time slot"
+            "message": "Doctor is not available at this time slot findDoctorAvailability"
         }
 
     return {
@@ -238,7 +240,7 @@ def addTimeSlotIDtoPatientAppt(timeSlotIDArg, timeSlotDetails):
 if __name__ == "__main__":
     print("This is flask " + os.path.basename(__file__) +
           " for process an appointment...")
-    app.run(host="0.0.0.0", port=5400, debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
     # Notes for the parameters:
     # - debug=True will reload the program automatically if a change is detected;
     #   -- it in fact starts two instances of the same flask program,

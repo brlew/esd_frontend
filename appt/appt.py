@@ -6,12 +6,15 @@ from datetime import datetime
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('dbURL') or 'mysql+mysqlconnector://root@localhost:3306/g1t6_appt'
+app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('dbURL') or 'mysql+mysqlconnector://is213@localhost:3306/g1t6_appt'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # TO RUN SERVICE
 # docker run -p 5100:5000 -e dbURL=mysql+mysqlconnector://root@host.docker.internal:3306/g1t6_appt veronicateng13/appt:g9t6
+
+# docker build -t borenlew/appt:g1t6_v2 ./
 # docker run -p 5100:5000 -e dbURL=mysql+mysqlconnector://root@host.docker.internal:3306/g1t6_appt borenlew/appt:g1t6_v2
+
 
 db = SQLAlchemy(app)
 
