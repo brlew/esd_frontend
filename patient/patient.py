@@ -10,7 +10,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # TO RUN SERVICE
 # docker run -p 5002:5000 -e dbURL=mysql+mysqlconnector://is213@host.docker.internal:3306/patient jthm/patient:g1t6
-# docker run -p 5500:5000 -e dbURL=mysql+mysqlconnector://root@host.docker.internal:3306/g1t6_patient borenlew/patient:g1t6_v1
+# docker run -p 5500:5000 -e dbURL=mysql+mysqlconnector://root@host.docker.internal:3306/g1t6_patient borenlew/patient:g1t6_v2
 
 db = SQLAlchemy(app)
 

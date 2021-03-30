@@ -15,6 +15,9 @@ CORS(app)
 appt_URL = "http://localhost:5100/appt/"
 doctor_URL = "http://localhost:5200/doctor"
 
+# To Run
+# python bookingappt.py 
+
 
 @app.route("/bookingappt/", methods=['POST'])
 def bookingappt():
