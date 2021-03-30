@@ -131,6 +131,23 @@
         <table class="table table-striped">
             <thead>
               <tr>
+                <th>Upcoming Appointments</th>
+                    <th>Date and Time</th>
+                    <th>Department</th>
+                    <th>Venue</th>
+              </tr>
+            </thead>
+            
+        </table>
+      </div>
+    </div>
+  </section>
+  <!-- <section class="inner-page">
+    <div id="appointment" class="container">
+      <div class="row">
+        <table class="table table-striped">
+            <thead>
+              <tr>
                 <th scope="col">apptID</th>
                     <th scope="col">pID</th>
                     <th scope="col">dID</th>
@@ -156,10 +173,62 @@
         </table>
       </div>
     </div>
-  </section>
+  </section> -->
 
  </main><!-- End #main -->
  <script>
+  function showError(message) {
+        // Hide the table and button in the event of error
+        // $('#booksTable').hide();
+        // $('#addBookBtn').hide();
+ 
+        // Display an error under the main container
+        $('#appointment')
+            .append("<label>"+message+"</label>");
+    }
+ // anonymous async function 
+    // - using await requires the function that calls it to be async
+    $(async() => {           
+        // Change serviceURL to your own
+        var serviceURL = "http://127.0.0.1:5100/appt";
+ 
+        try {
+            const response =
+             await fetch(
+               serviceURL, { method: 'GET' }
+            );
+            const result = await response.json();
+             if (response.status === 200) {
+                // success case
+                var appts = result.data.appts; //the array is in books within data of 
+                                               // the returned result
+                // for loop to setup all table rows with obtained book data
+                var rows = "";
+                for (const item of appts) {
+                   eachRow ="<td>" + item.apptID + "</td>" +
+                            "<td>" + item.apptDateTime + "</td>";
+                           
+                   rows += "<tbody><tr>" + eachRow + "</tr></tbody>";
+                }
+                    // add all the rows to the table
+                    $('#appointment').append(rows);
+                } else if (response.status == 404) {
+                    // No books
+                    showError(result.message);
+                } else {
+                    // unexpected outcome, throw the error
+                    throw response.status;
+                }
+            } catch (error) {
+                // Errors when calling the service; such as network error, 
+                // service offline, etc
+                showError
+    ('There is a problem retrieving appointment data, please try again later.<br />' + error);
+            } // error
+    });
+
+</script>
+ <!-- <script>
   var serviceURL = "http://localhost:5300/appt";
   // var place_order_URL = "http://localhost:5100/place_order";
 
@@ -212,7 +281,7 @@
           
 });
 </script>
- 
+  -->
 
 <!-- ======= Footer ======= -->
 <footer id="footer">
