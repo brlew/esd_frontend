@@ -28,15 +28,16 @@ CREATE TABLE IF NOT EXISTS `patient` (
   `pAge` int(11) NOT NULL,
   `pNumber` varchar(8) NOT NULL,
   `pAddress` varchar(100) NOT NULL,
-  `allergies` varchar(100) NULL,
+  `pAllergies` varchar(100) NULL,
+  `pPwd` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`pID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 
 -- Dumping data for table `patient`
-INSERT INTO `patient` (`pID`, `pName`, `pAge`, `pNumber`, `pAddress`, `allergies`) VALUES
-(1, 'Veronica', '21', '98765432', 'cck', 'Paracetamol'),
-(2, 'Jasmine', '21', '87654321', 'amk', 'Cetirizine');
+INSERT INTO `patient` (`pID`, `pName`, `pAge`, `pNumber`, `pAddress`, `pAllergies`, `pPwd`) VALUES
+(1, 'Veronica', '21', '98765432', 'cck', 'Paracetamol', 'vpwd'),
+(2, 'Jasmine', '21', '87654321', 'amk', 'Cetirizine', 'jpwd');
 
 
 /*--------------------------------------------------------------

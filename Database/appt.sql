@@ -26,22 +26,24 @@ CREATE TABLE IF NOT EXISTS `appt` (
   `apptID` int(11) NOT NULL AUTO_INCREMENT,
   `pID` int(11) NOT NULL,
   `dID` int(11) NOT NULL,
+  `timeSlotID` int(11) NOT NULL,
   `apptDateTime` datetime NOT NULL,
   `apptStatus` varchar(10) NOT NULL DEFAULT 'Pending',
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`apptID`),
   KEY `appt_fk1` (`dID`),
-  KEY `appt_fk2` (`pID`)
+  KEY `appt_fk2` (`pID`),
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table `appt`
-INSERT INTO `appt` (`apptID`, `pID`, `dID`, `apptDateTime`, `apptStatus`, `created`, `modified`) VALUES
-(1, 1, 2, '2021-08-17 04:00:00', 'pending', '2020-06-12 02:14:55', '2020-06-12 02:14:55');
+INSERT INTO `appt` (`apptID`, `pID`, `dID`, `timeSlotID`, `apptDateTime`, `apptStatus`, `created`, `modified`) VALUES
+(1, 1, 2, 6, '2021-08-17 04:30:00', 'pending', '2020-06-12 02:14:55', '2020-06-12 02:14:55');
 
 -- Foreign Key
 ALTER TABLE `appt`
   ADD CONSTRAINT `appt_fk1` FOREIGN KEY (`dID`) REFERENCES g1t6_doctor.doctor(`dID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `appt_fk2` FOREIGN KEY (`pID`) REFERENCES g1t6_patient.patient(`pID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  -- ADD CONSTRAINT `appt_fk3` FOREIGN KEY (`timeSlotID`) REFERENCES g1t6_doctor.doctorAvail(`timeSlotID`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
