@@ -28,14 +28,13 @@ CREATE TABLE IF NOT EXISTS `doctor` (
     `dName` varchar(50) NOT NULL,
     `dDepartment` varchar(32) NOT NULL,
     `dRoom` varchar(32) NOT NULL,
-    `dPwd` varchar(255) DEFAULT NULL,
     PRIMARY KEY (`dID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table `doctor`
-INSERT INTO `doctor` (`dID`, `dName`, `dDepartment`, `dRoom`, `dPwd`) VALUES
-(1, 'Tom', 'Cardiologists', 'Rm3-1', 'tompwd'), 
-(2, 'Henry', 'Cardiologists', 'Rm3-2', 'henrypwd'); 
+INSERT INTO `doctor` (`dID`, `dName`, `dDepartment`, `dRoom`) VALUES
+(1, 'Tom', 'Cardiologists', 'Rm3-1'), 
+(2, 'Henry', 'Cardiologists', 'Rm3-2'); 
 
 
 /*--------------------------------------------------------------
