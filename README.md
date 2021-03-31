@@ -29,10 +29,10 @@ For Windows :
     docker images
     ```
 
-6.  When 'docker images' is run, you should see the following images.
-    - veronicateng13/bookingappt
-    - veronicateng13/prescription
-    - veronicateng13/doctor
-    - veronicateng13/patient
-    - veronicateng13/appt
+6.  When 'docker images' is run, you should see the following images with tag `g1t6`.
+    - borenlew/bookingappt
+    - borenlew/prescription
+    - borenlew/doctor
+    - borenlew/patient
+    - borenlew/appt
 
