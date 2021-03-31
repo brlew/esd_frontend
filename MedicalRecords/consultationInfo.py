@@ -11,33 +11,33 @@ CORS(app)
 
 # docker run -p 5004:5000 -e dbURL=mysql+mysqlconnector://is213@host.docker.internal:3306 jthm/insert_consultdetails:g1t6
 
-@app.route("/consultDetails/appt", methods=['GET'])
-def getAllApptByDoctorID():
-    result = viewAllAppt()
+@app.route("/consultDetails/doctor/appt/<string:did>", methods=['GET'])
+def getAllApptByDoctorID(did):
+    result = viewAllAppt(did)
     print('\n------------------------')
     print('result: ', result)
     return jsonify(result), result["code"]
 
-def viewAllAppt():
+def viewAllAppt(did):
     print('\n-----Invoking Appointment microservice-----')
-    patientMedRec_result = invoke_http("http://localhost:5005/patient", method='GET')
+    doctorAppt_result = invoke_http("http://localhost:5007/doctor/appt/" + did, method='GET')
 
-    print('patientMedRec_result:', patientMedRec_result)
+    print('doctorAppt_result:', doctorAppt_result)
 
-    code = patientMedRec_result["code"]
+    code = doctorAppt_result["code"]
 
     if code not in range(200, 300):
         return {
             "code": 400,
-            "message": "Patient got no medical Records."
+            "message": "Doctor got no Appointment."
         }
 
     return {
         "code": 201,
         "data": {
-            "patientMedRec_result" : patientMedRec_result
+            "doctorAppt_result" : doctorAppt_result
             },
-        "message": "Successfully retrieved patient's medical records"
+        "message": "Successfully retrieved doctor's appointment"
         }
 
 
