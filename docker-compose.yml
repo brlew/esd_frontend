@@ -9,7 +9,7 @@ services:
   #################################
   appt:
     hostname: apptcontainer
-    image: borenlew/appt:g1t6_v2
+    image: veronicateng13/appt:g1t6_v2
     restart: always
     ports: 
     - "5100:5000"
@@ -23,7 +23,7 @@ services:
   ###############################################
   doctor:
     hostname: doctorcontainer
-    image: borenlew/doctor:g1t6_v2
+    image: veronicateng13/doctor:g1t6_v2
     restart: always
     ports: 
     - "5200:5000"
@@ -36,7 +36,7 @@ services:
   # patient 
   ###############################################
   patient:
-    image: borenlew/patient:g1t6_v2
+    image: veronicateng13/patient:g1t6_v2
     restart: always
     ports: 
     - "5500:5000"
@@ -47,7 +47,7 @@ services:
   # prescription 
   ###############################################
   prescription:
-    image: borenlew/prescription:g1t6_v2
+    image: veronicateng13/prescription:g1t6_v2
     restart: always
     ports: 
     - "5300:5000"
@@ -58,7 +58,7 @@ services:
   # bookingappt 
   ###############################################
   bookingappt:
-    image: borenlew/bookingappt:g1t6_v2
+    image: veronicateng13/bookingappt:g1t6_v2
     restart: always
     ports: 
     - "5400:5000"
