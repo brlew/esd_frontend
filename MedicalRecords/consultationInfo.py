@@ -9,14 +9,36 @@ from invokes import invoke_http
 app = Flask(__name__)
 CORS(app)
 
-# patient_URL = "http://localhost:5002/patient"
-# prescription_URL = "http://localhost:5003/prescription"
-# order_URL = "http://localhost:5001/order"
-# shipping_record_URL = "http://localhost:5002/shipping_record"
-# activity_log_URL = "http://localhost:5003/activity_log"
-# error_URL = "http://localhost:5004/error"
-
 # docker run -p 5004:5000 -e dbURL=mysql+mysqlconnector://is213@host.docker.internal:3306 jthm/insert_consultdetails:g1t6
+@app.route("/consultDetails", methods=['GET'])
+def getAllPatientMedRec():
+    result = viewAllPatientMedRec()
+    print('\n------------------------')
+    print('result: ', result)
+    return jsonify(result), result["code"]
+
+def viewAllPatientMedRec():
+    print('\n-----Invoking patient microservice-----')
+    patientMedRec_result = invoke_http("http://localhost:5005/patient", method='GET')
+
+    print('patientMedRec_result:', patientMedRec_result)
+
+    code = patientMedRec_result["code"]
+
+    if code not in range(200, 300):
+        return {
+            "code": 400,
+            "message": "Patient got no medical Records."
+        }
+
+    return {
+        "code": 201,
+        "data": {
+            "patientMedRec_result" : patientMedRec_result
+            },
+        "message": "Successfully retrieved patient's medical records"
+        }
+
 
 @app.route("/consultDetails/<string:pid>", methods=['GET'])
 def getPatientMedRec(pid):
@@ -47,16 +69,46 @@ def viewPatientMedRec(pid):
         "message": "Successfully retrieved patient's medical records"
         }
 
-@app.route("/consultDetails/<string:pid>/<string:aid>", methods=['GET'])
-def getPatientPrescription(pid, aid):
-    result = viewPatientPrescription(pid, aid)
+@app.route("/consultDetails/prescription", methods=['GET'])
+def getAllPatientPrescription():
+    result = viewAllPatientPrescription()
     print('\n------------------------')
     print('result: ', result)
     return jsonify(result), result["code"]
 
-def viewPatientPrescription(pid, aid):
+def viewAllPatientPrescription():
     print('\n-----Invoking prescription microservice-----')
-    patientPrescription_result = invoke_http("http://localhost:5006/prescription/" + pid + "/" + aid, method='GET')
+    patientPrescription_result = invoke_http("http://localhost:5006/prescription", method='GET')
+
+    print('patientPrescription_result:', patientPrescription_result)
+
+    code = patientPrescription_result["code"]
+
+    if code not in range(200, 300):
+        return {
+            "code": 400,
+            "message": "Patient got no prescription."
+        }
+
+    return {
+        "code": 201,
+        "data": {
+            "patientPrescription_result" : patientPrescription_result
+            },
+        "message": "Successfully retrieved patient's prescription"
+        }
+
+
+@app.route("/consultDetails/prescription/<string:pid>", methods=['GET'])
+def getPatientPrescription(pid):
+    result = viewPatientPrescription(pid)
+    print('\n------------------------')
+    print('result: ', result)
+    return jsonify(result), result["code"]
+
+def viewPatientPrescription(pid):
+    print('\n-----Invoking prescription microservice-----')
+    patientPrescription_result = invoke_http("http://localhost:5006/prescription/" + pid, method='GET')
 
     print('patientPrescription_result:', patientPrescription_result)
 
