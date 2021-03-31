@@ -5,15 +5,11 @@ from os import environ
 
 app = Flask(__name__)
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root@localhost:3306/patient'
-app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('dbURL')
+app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('dbURL') or 'mysql+mysqlconnector://root@localhost:3306/patient'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # TO RUN SERVICE
 # docker run -p 5002:5000 -e dbURL=mysql+mysqlconnector://is213@host.docker.internal:3306/patient jthm/patient:g1t6
-
-# TO RUN SERVICE
-# docker build -t borenlew/patient:g1t6_v2 ./
-# docker run -p 5500:5000 -e dbURL=mysql+mysqlconnector://root@host.docker.internal:3306/g1t6_patient borenlew/patient:g1t6_v2
 
 db = SQLAlchemy(app)
 
@@ -44,7 +40,7 @@ class Patient(db.Model):
         return dto
 
 class Medical_Record(db.Model):
-    __tablename__ = 'medicalRecord'
+    __tablename__ = 'medicalrecords'
 
     pid = db.Column(db.ForeignKey(
         'patient.pid', ondelete='CASCADE', onupdate='CASCADE'), nullable=False, primary_key=True, index=True)
@@ -56,7 +52,12 @@ class Medical_Record(db.Model):
     )
 
     def json(self):
-        return {'pDiagnosis': self.pDiagnosis, 'created': self.created}
+        dto = {
+            'pDiagnosis': self.pDiagnosis, 
+            'created': self.created
+        }
+
+        return dto
     
 
 @app.route("/patient")
@@ -162,4 +163,4 @@ def create_medRec(pid):
 
 
 if __name__ == '__main__':
-   app.run(host='0.0.0.0', port=5500, debug=True)
+   app.run(host='0.0.0.0', port=5005, debug=True)
