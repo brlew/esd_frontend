@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `patientLogin` (
 
 
 -- Dumping data for table `patientLogin`
-INSERT INTO `patientLogin` (`pName`, `pPwd`) VALUES
+INSERT INTO `patientLogin` (`pUsername`, `pPwd`) VALUES
 ('veronlehhh', 'vpwd'),
 ('jasjas', 'jpwd');
 
@@ -43,9 +43,9 @@ CREATE TABLE IF NOT EXISTS `empLogin` (
   `eUsername` varchar(50) NOT NULL,
   `ePwd` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`eUsername`)
-)ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table `empLogin`
-INSERT INTO `empLogin`(`eName`, `ePwd`) VALUES
+INSERT INTO `empLogin` (`eUsername`, `ePwd`) VALUES
 ('tom', 'tpwd'),
 ('henry', 'hpwd');
