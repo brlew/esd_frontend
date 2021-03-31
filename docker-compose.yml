@@ -49,16 +49,16 @@ services:
   ###############################################
   # bookingappt 
   ###############################################
-  bookingappt:
-    image: borenlew/bookingappt:g1t6_v2
-    restart: always
-    ports: 
-    - "5400:5000"
-    depends_on:
-      - appt
-      - doctor
-      - patient
-      - prescription
+  # bookingappt:
+  #   image: borenlew/bookingappt:g1t6_v2
+  #   restart: always
+  #   ports: 
+  #   - "5400:5000"
+  #   depends_on:
+  #     - appt
+  #     - doctor
+  #     - patient
+  #     - prescription
 
 
 
