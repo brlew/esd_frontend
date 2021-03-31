@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 
 import os, sys
+from os import environ
 
 import requests
 from invokes import invoke_http
@@ -12,8 +13,12 @@ app = Flask(__name__)
 CORS(app)
 
 #prescription_URL = "http://localhost:5000/prescription"
-appt_URL = "http://localhost:5100/appt/"
-doctor_URL = "http://localhost:5200/doctor"
+# appt_URL = "http://localhost:5100/appt/"
+# doctor_URL = "http://localhost:5200/doctor"
+
+appt_URL = environ.get('appt_URL') or "http://localhost:5100/appt/"
+doctor_URL = environ.get('doctor_URL') or "http://localhost:5200/doctor"
+
 
 # To Run
 # python bookingappt.py 
