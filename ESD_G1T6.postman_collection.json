@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "Appointment - get all",
+			"name": "Appt - get all",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -25,16 +25,27 @@
 			"response": []
 		},
 		{
-			"name": "Appointment - get one",
+			"name": "Appt - get one",
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": null
+				"url": {
+					"raw": "http://localhost:5100/appt/9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5100",
+					"path": [
+						"appt",
+						"9"
+					]
+				}
 			},
 			"response": []
 		},
 		{
-			"name": "Appointment - create",
+			"name": "Appt - create",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -48,12 +59,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5005/appt/",
+					"raw": "http://localhost:5100/appt/",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "5005",
+					"port": "5100",
 					"path": [
 						"appt",
 						""
@@ -63,11 +74,175 @@
 			"response": []
 		},
 		{
-			"name": "Appointment - update",
+			"name": "Appt - update",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"pID\": 1,\r\n    \"dID\": 1,\r\n    \"apptDateTime\": \"2020-06-12 02:14:51\",\r\n    \"apptStatus\": \"TEST\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5100/appt/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5100",
+					"path": [
+						"appt",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Doctor - get all",
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": null
+				"url": {
+					"raw": "http://localhost:5200/doctor",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5200",
+					"path": [
+						"doctor"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Doctor - get one",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5100/appt/9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5100",
+					"path": [
+						"appt",
+						"9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Doctor - get by dpt",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5100/appt/9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5100",
+					"path": [
+						"appt",
+						"9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Prescription - get all",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/appt",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"appt"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Prescription - get one",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/appt",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"appt"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Prescription - create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"pID\": 1,\r\n    \"dID\": 1,\r\n    \"apptDateTime\": \"2020-06-12 02:14:55\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5100/appt/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5100",
+					"path": [
+						"appt",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Booking Appt - correct inputs",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:5400/bookingappt",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5400",
+					"path": [
+						"bookingappt"
+					]
+				}
 			},
 			"response": []
 		}

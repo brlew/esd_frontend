@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `appt` (
   `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`apptID`),
   KEY `appt_fk1` (`dID`),
-  KEY `appt_fk2` (`pID`),
+  KEY `appt_fk2` (`pID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table `appt`
@@ -44,6 +44,5 @@ INSERT INTO `appt` (`apptID`, `pID`, `dID`, `timeSlotID`, `apptDateTime`, `apptS
 ALTER TABLE `appt`
   ADD CONSTRAINT `appt_fk1` FOREIGN KEY (`dID`) REFERENCES g1t6_doctor.doctor(`dID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `appt_fk2` FOREIGN KEY (`pID`) REFERENCES g1t6_patient.patient(`pID`) ON DELETE CASCADE ON UPDATE CASCADE;
-  -- ADD CONSTRAINT `appt_fk3` FOREIGN KEY (`timeSlotID`) REFERENCES g1t6_doctor.doctorAvail(`timeSlotID`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
