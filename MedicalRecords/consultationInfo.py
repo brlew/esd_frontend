@@ -10,6 +10,37 @@ app = Flask(__name__)
 CORS(app)
 
 # docker run -p 5004:5000 -e dbURL=mysql+mysqlconnector://is213@host.docker.internal:3306 jthm/insert_consultdetails:g1t6
+
+@app.route("/consultDetails/appt", methods=['GET'])
+def getAllApptByDoctorID():
+    result = viewAllAppt()
+    print('\n------------------------')
+    print('result: ', result)
+    return jsonify(result), result["code"]
+
+def viewAllAppt():
+    print('\n-----Invoking Appointment microservice-----')
+    patientMedRec_result = invoke_http("http://localhost:5005/patient", method='GET')
+
+    print('patientMedRec_result:', patientMedRec_result)
+
+    code = patientMedRec_result["code"]
+
+    if code not in range(200, 300):
+        return {
+            "code": 400,
+            "message": "Patient got no medical Records."
+        }
+
+    return {
+        "code": 201,
+        "data": {
+            "patientMedRec_result" : patientMedRec_result
+            },
+        "message": "Successfully retrieved patient's medical records"
+        }
+
+
 @app.route("/consultDetails", methods=['GET'])
 def getAllPatientMedRec():
     result = viewAllPatientMedRec()
