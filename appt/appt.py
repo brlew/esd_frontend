@@ -81,6 +81,23 @@ def find_by_apptID(apptID):
         }
     ), 404
 
+@app.route("/doctor/appt/<int:dID>/")
+def find_by_docID(dID):
+    appt = Appt.query.filter_by(dID=dID).first()
+    if appt:
+        return jsonify(
+            {
+                "code": 200,
+                "data": appt.json()
+            }
+        )
+    return jsonify(
+        {
+            "code": 404,
+            "message": f"Doctor ID {dID} not found."
+        }
+    ), 404
+
 
 @app.route("/appt/", methods=['POST'])
 def create_appt():
@@ -168,5 +185,5 @@ def update_appt(apptID):
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5100, debug=True)
+    app.run(host='0.0.0.0', port=5007, debug=True)
 
