@@ -195,33 +195,22 @@
                                 </div>
                               </div>
                             </div>
-                            <!-- <div class="mb-3">
-                              <div class="row">
-                                <div class="col">
-                                  <label for="medCode" class="form-label">Medicine Code</label>
-                                  <input v-model="NewMedCode" type="text" class="form-control" id="medCode">
-                                </div>
-                                <div class="col">
-                                  <label for="medDescription" class="form-label">Medicine Description</label>
-                                  <input v-model="NewMedDescription" type="text" class="form-control" id="medDescription">
-                                </div>
-                              </div>
-                            </div> -->
                             <div class="mb-3">
-                              <button @click="addConsultDetails(patients.pid)" type="reset" class="appointment-btn" style="position: absolute; right: 110px;">ADD</button><br>
-                              <div class="text-success" v-if="consultAdded">
-                                The consultation details has been successfully added! <br>
-                                <br>
-                              </div>
-                              <div class="text-danger" v-if="addConsultError!=''">
-                                There is a problem adding this consultation details:<br>
-                                {{ addConsultError }}
-                                <br>
-                              </div>
+                              <button @click="addConsultDetails" type="button" class="appointment-btn" style="position: absolute; right: 110px;">ADD</button><br>
                             </div>
                           </div>
                         </div>
                       </div>
+                    </div>
+
+                    <div class="text-success" v-if="consultAdded">
+                      The consultation details has been successfully added! <br>
+                      <br>
+                    </div>
+                    <div class="text-danger" v-if="addConsultError!=''">
+                      There is a problem adding this consultation details:<br>
+                      {{ addConsultError }}
+                      <br>
                     </div>
                   </div>
                 </div>
@@ -403,10 +392,10 @@
                     });
                     console.log("response", this.patients);
                 },
-                getPatientByID: function (pid) {
-                  console.log(pid)
+                getPatientByID: function () {
+                  console.log(this.PID)
                   const response =
-                  fetch(`${serviceURL}/${pid}`)
+                  fetch(`${serviceURL}/${this.PID}`)
                     .then(response => response.json())
                     .then(data => {
                         console.log(response);
@@ -429,7 +418,7 @@
                     });
                     console.log("response", this.patients);
 
-                    fetch(`${prescription_URL}/${pid}`)
+                    fetch(`${prescription_URL}/${this.PID}`)
                     .then(response => response.json())
                     .then(data => {
                         console.log(response);
@@ -454,7 +443,7 @@
                     console.log("response", this.prescription);
                     document.getElementById("navtab").style.display = "inline";
                 },
-                addConsultDetails: function (pid) {
+                addConsultDetails: function () {
                   console.log("inaddConsult - aid=", this.AID)
                   this.consultAdded = false;
                   this.addConsultError = "";
@@ -466,13 +455,13 @@
                     Prescription: {
                       medName: this.NewMedName,
                       dosage: this.NewDosage,
-                      pID: pid,
+                      pID: this.PID,
                       aID: this.AID
                     }
                   });
                   console.log(jsonData);
 
-                  fetch(`${serviceURL}/${pid}/medicalRecords`,
+                  fetch(`${serviceURL}/${this.PID}/medicalRecords`,
                     {
                         method: "POST",
                         headers: {
@@ -492,7 +481,12 @@
                                 this.consultAdded = true;
 
                                 // refresh book list
-                                this.getPatientByID(pid);
+                                this.getPatientByID(this.PID);
+                                this.clearInputField();
+                                document.getElementById("addconsultdetailBtn").setAttribute("aria-expanded", false);
+                                document.getElementById("flush-collapseOne").setAttribute("class", "accordion-collapse collapse");
+
+                                
 
                                 // an alternate way is to add this one element into this.books
                                 break;
@@ -504,8 +498,14 @@
                                 throw `${data.code}: ${data.message}`;
                         }
                     })
-                    document.getElementById("addconsultdetailBtn").setAttribute("aria-expanded", false);
-                    document.getElementById("addconsultdetailBtn").setAttribute("class", "appointment-btn collapsed");
+                },
+                clearInputField: function () {
+                  console.log("hello");
+                  console.log(document.getElementById("Diagnosis").value)
+                  document.getElementById("Diagnosis").value = "";
+                  document.getElementById("medName").value = "";
+                  document.getElementById("dosage").value = "";
+                  console.log(document.getElementById("Diagnosis").value)
                 }
             },
             created: function () {
@@ -516,8 +516,9 @@
               console.log("pid=", pid);
               console.log("aid=", aid);
               this.AID = aid;
+              this.PID = pid;
               // console.log("this.pid=", this.pid);
-              this.getPatientByID(pid);
+              this.getPatientByID();
             }
             
   });
