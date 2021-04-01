@@ -271,41 +271,10 @@
                 viewPatientDetails: function (pID, aID) {
                   console.log(pID, aID)
                   window.location.href = '/esd_frontend/SeekHealth/consultation.html?pid=' + pID + '&aid=' + aID;
-                //   router.push("consultation.html");
-                //   const response =
-                //     fetch(`${service_URL}/${this.pID}`)
-                //       .then(response => response.json())
-                //       .then(data => {
-                //           console.log(response);
-                //           console.log(data.message);
-                //           console.log(data.data.patientPrescription_result.code);
-                //           if (data.data.patientPrescription_result.code === 404) {
-                //               // no book in db
-                //               this.message = data.message;
-                //               this.prescription = [];
-                //           } else {
-                //               this.prescription = data.data.patientPrescription_result.data;
-                //               console.log(this.prescription)
-                //           }
-                //       })
-                //       .catch(error => {
-                //           // Errors when calling the service; such as network error, 
-                //           // service offline, etc
-                //           console.log(this.message + error);
-
-                //       });
                 }
               },
               created: function () {
                 this.getAllAppt();
-                // axios.get(service_URL) 
-                //   .then(response => { //Step 3A: then function handles the success case
-                //       this.prescription = response.data.data.patientPrescription_result.data.prescriptions
-                //       console.log("return Data: ", this.prescription)
-                //   })
-                //   .catch(error => { //Step 3B: catch handles the failure case
-                //       this.prescription = 'There was an error: ' + error.message 
-                //   })
               }
             
   });
