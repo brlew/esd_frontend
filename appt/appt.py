@@ -83,12 +83,12 @@ def find_by_apptID(apptID):
 
 @app.route("/doctor/appt/<int:dID>/")
 def find_by_docID(dID):
-    appt = Appt.query.filter_by(dID=dID).first()
-    if appt:
+    apptlist = Appt.query.filter_by(dID=dID).all()
+    if apptlist:
         return jsonify(
             {
                 "code": 200,
-                "data": appt.json()
+                "data": [appt.json() for appt in apptlist]
             }
         )
     return jsonify(
