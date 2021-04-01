@@ -25,9 +25,7 @@ DROP TABLE IF EXISTS `prescription`;
 CREATE TABLE IF NOT EXISTS `prescription` (
   `prescriptionID` int(8) NOT NULL AUTO_INCREMENT,
   `medName` varchar(25) NOT NULL,
-  `medDescription` varchar(100) NOT NULL,
   `dosage` varchar(20) NOT NULL,
-  `medCode` varchar(8) NOT NULL,
   `pID` int(11) NOT NULL,
   `aID` int(11) NOT NULL,
   PRIMARY KEY (`prescriptionID`),
@@ -36,8 +34,8 @@ CREATE TABLE IF NOT EXISTS `prescription` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table `prescription`
-INSERT INTO `prescription` (`prescriptionID`, `medName`, `medDescription`, `dosage`, `medCode`, `pID`, `aID`) VALUES 
-(1, 'amoxicillin', 'Antibiotic used to treat a number of bacterial infections', '200mg', 'ABCDE', 1, 1);
+INSERT INTO `prescription` (`prescriptionID`, `medName`, `dosage`, `pID`, `aID`) VALUES 
+(1, 'amoxicillin', '200mg', 1, 1);
 
 -- Foreign Key
 ALTER TABLE `prescription`
