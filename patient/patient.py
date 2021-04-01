@@ -5,11 +5,11 @@ from os import environ
 
 app = Flask(__name__)
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root@localhost:3306/patient'
-app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('dbURL') or 'mysql+mysqlconnector://root@localhost:3306/patient'
+app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('dbURL') or 'mysql+mysqlconnector://root@localhost:3306/g1t6_patient'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # TO RUN SERVICE
-# docker run -p 5002:5000 -e dbURL=mysql+mysqlconnector://is213@host.docker.internal:3306/patient jthm/patient:g1t6
+# docker run -p 5002:5000 -e dbURL=mysql+mysqlconnector://is213@host.docker.internal:3306/g1t6_patient jthm/patient:g1t6
 
 db = SQLAlchemy(app)
 
@@ -21,7 +21,7 @@ class Patient(db.Model):
     pAge = db.Column(db.Integer, nullable=False)
     pNumber = db.Column(db.Integer, nullable=False)
     pAddress = db.Column(db.String(100), nullable=False)
-    allergies = db.Column(db.String(100), nullable=True)
+    pAllergies = db.Column(db.String(100), nullable=True)
 
     def json(self):
         dto = {
@@ -30,7 +30,7 @@ class Patient(db.Model):
             'pAge': self.pAge,
             'pNumber': self.pNumber,
             'pAddress': self.pAddress,
-            'allergies': self.allergies
+            'pAllergies': self.pAllergies
         }
 
         dto['medical_record'] = []
@@ -40,7 +40,7 @@ class Patient(db.Model):
         return dto
 
 class Medical_Record(db.Model):
-    __tablename__ = 'medicalrecords'
+    __tablename__ = 'medicalrecord'
 
     pid = db.Column(db.ForeignKey(
         'patient.pid', ondelete='CASCADE', onupdate='CASCADE'), nullable=False, primary_key=True, index=True)
