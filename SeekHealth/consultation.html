@@ -195,7 +195,7 @@
                                 </div>
                               </div>
                             </div>
-                            <div class="mb-3">
+                            <!-- <div class="mb-3">
                               <div class="row">
                                 <div class="col">
                                   <label for="medCode" class="form-label">Medicine Code</label>
@@ -206,7 +206,7 @@
                                   <input v-model="NewMedDescription" type="text" class="form-control" id="medDescription">
                                 </div>
                               </div>
-                            </div>
+                            </div> -->
                             <div class="mb-3">
                               <button @click="addConsultDetails(patients.pid)" type="reset" class="appointment-btn" style="position: absolute; right: 110px;">ADD</button><br>
                               <div class="text-success" v-if="consultAdded">
@@ -247,8 +247,8 @@
                         <th scope="col">Prescription ID</th>
                         <th scope="col">Dosage</th>
                         <th scope="col">Medicine Name</th>
-                        <th scope="col">Medicine Description</th>
-                        <th scope="col">Medicine Code</th>
+                        <!-- <th scope="col">Medicine Description</th>
+                        <th scope="col">Medicine Code</th> -->
                         <th scope="col">Appiontment ID</th>
                       </tr>
                     </thead>
@@ -257,8 +257,8 @@
                         <td>{{ prescript.prescriptionID }}</td>
                         <td>{{ prescript.dosage }}</td>
                         <td>{{ prescript.medName }}</td>
-                        <td>{{ prescript.medDescription }}</td>
-                        <td>{{ prescript.medCode }}</td>
+                        <!-- <td>{{ prescript.medDescription }}</td>
+                        <td>{{ prescript.medCode }}</td> -->
                         <td>{{ prescript.aID }}</td>
                       </tr>
                     </tbody>
@@ -372,8 +372,8 @@
               newDiagnosis: "",
               NewMedName: "",
               NewDosage: "",
-              NewMedCode: "",
-              NewMedDescription: "",
+              // NewMedCode: "",
+              // NewMedDescription: "",
               consultAdded: false,
               addConsultError: "",
               AID: "",
@@ -465,9 +465,7 @@
                     },
                     Prescription: {
                       medName: this.NewMedName,
-                      medDescription: this.NewMedDescription,
                       dosage: this.NewDosage,
-                      medCode: this.NewMedDescription,
                       pID: pid,
                       aID: this.AID
                     }
@@ -520,16 +518,6 @@
               this.AID = aid;
               // console.log("this.pid=", this.pid);
               this.getPatientByID(pid);
-              // this.getAllPatients();
-              // axios.get(serviceURL) 
-              //   .then(response => { //Step 3A: then function handles the success case
-              //       this.patients = response.data.data.patientMedRec_result.data.patients
-              //       console.log("return Data: ", this.patients);
-              //   })
-              //   .catch(error => { //Step 3B: catch handles the failure case
-              //       this.patients = 'There was an error: ' + error.message 
-              //   })
-              //   console.log("Data", this.patients);
             }
             
   });
