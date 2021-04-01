@@ -140,7 +140,7 @@
                   <td>{{ appointment.pID }}</td>
                   <td>{{ appointment.apptDateTime }}</td>
                   <td>
-                    <button @click="viewPatientDetails(appointment.pID)" type="button" class="appointment-btn">View Patient Details</button>
+                    <button @click="viewPatientDetails(appointment.pID, appointment.apptID)" type="button" class="appointment-btn">View Patient Details</button>
                   </td>
                 </tr>
               </tbody>
@@ -268,8 +268,9 @@
 
                     });
                 },
-                viewPatientDetails: function (pID) {
-                  console.log(pID)
+                viewPatientDetails: function (pID, aID) {
+                  console.log(pID, aID)
+                  window.location.href = '/esd_frontend/SeekHealth/consultation.html?pid=' + pID + '&aid=' + aID;
                 //   router.push("consultation.html");
                 //   const response =
                 //     fetch(`${service_URL}/${this.pID}`)
