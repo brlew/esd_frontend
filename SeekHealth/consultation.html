@@ -129,10 +129,10 @@
       <div id="consult" class="container">
         <div class="row">
           <div id="main">
-            <div style="padding: 10px;">
+            <!-- <div style="padding: 10px;">
               Enter Patient ID: <input v-model="pID" placeholder="Patient ID">
               <button @click="getPatientByID()" type="button" class="appointment-btn">Go</button><br>
-            </div>
+            </div> -->
             
             <div id="navtab" style="display:none">
               <nav>
@@ -208,7 +208,7 @@
                               </div>
                             </div>
                             <div class="mb-3">
-                              <button @click="addConsultDetails" type="reset" class="appointment-btn" style="position: absolute; right: 110px;">ADD</button><br>
+                              <button @click="addConsultDetails(patients.pid)" type="reset" class="appointment-btn" style="position: absolute; right: 110px;">ADD</button><br>
                               <div class="text-success" v-if="consultAdded">
                                 The consultation details has been successfully added! <br>
                                 <br>
@@ -376,6 +376,7 @@
               NewMedDescription: "",
               consultAdded: false,
               addConsultError: "",
+              AID: "",
               // patientAdded: false,
             },
             methods: {
@@ -402,10 +403,10 @@
                     });
                     console.log("response", this.patients);
                 },
-                getPatientByID: function () {
-                  console.log(this.pID)
+                getPatientByID: function (pid) {
+                  console.log(pid)
                   const response =
-                  fetch(`${serviceURL}/${this.pID}`)
+                  fetch(`${serviceURL}/${pid}`)
                     .then(response => response.json())
                     .then(data => {
                         console.log(response);
@@ -428,7 +429,7 @@
                     });
                     console.log("response", this.patients);
 
-                    fetch(`${prescription_URL}/${this.pID}`)
+                    fetch(`${prescription_URL}/${pid}`)
                     .then(response => response.json())
                     .then(data => {
                         console.log(response);
@@ -453,7 +454,8 @@
                     console.log("response", this.prescription);
                     document.getElementById("navtab").style.display = "inline";
                 },
-                addConsultDetails: function () {
+                addConsultDetails: function (pid) {
+                  console.log("inaddConsult - aid=", this.AID)
                   this.consultAdded = false;
                   this.addConsultError = "";
 
@@ -466,13 +468,13 @@
                       medDescription: this.NewMedDescription,
                       dosage: this.NewDosage,
                       medCode: this.NewMedDescription,
-                      pID: this.pID,
-                      aID: 2
+                      pID: pid,
+                      aID: this.AID
                     }
                   });
                   console.log(jsonData);
 
-                  fetch(`${serviceURL}/${this.pID}/medicalRecords`,
+                  fetch(`${serviceURL}/${pid}/medicalRecords`,
                     {
                         method: "POST",
                         headers: {
@@ -492,7 +494,7 @@
                                 this.consultAdded = true;
 
                                 // refresh book list
-                                this.getPatientByID();
+                                this.getPatientByID(pid);
 
                                 // an alternate way is to add this one element into this.books
                                 break;
@@ -509,6 +511,15 @@
                 }
             },
             created: function () {
+              const queryString = window.location.search;
+              const urlParams = new URLSearchParams(queryString);
+              const pid = urlParams.get('pid')
+              const aid = urlParams.get('aid')
+              console.log("pid=", pid);
+              console.log("aid=", aid);
+              this.AID = aid;
+              // console.log("this.pid=", this.pid);
+              this.getPatientByID(pid);
               // this.getAllPatients();
               // axios.get(serviceURL) 
               //   .then(response => { //Step 3A: then function handles the success case
