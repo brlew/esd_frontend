@@ -24,7 +24,7 @@ USE `g1t6_patient`;
 -- name/nric/race/dob/mobile_no
 DROP TABLE IF EXISTS `patient`;
 CREATE TABLE IF NOT EXISTS `patient` (
-  `pID` int(11) NOT NULL AUTO_INCREMENT, --NRIC
+  `pID` int(11) NOT NULL AUTO_INCREMENT,
   `pName` varchar(50) NOT NULL,
   `pAge` int(11) NOT NULL,
   `pNumber` varchar(8) NOT NULL,
