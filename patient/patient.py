@@ -9,7 +9,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('dbURL') or 'mysql+mysqlconn
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # TO RUN SERVICE
-# docker run -p 5002:5000 -e dbURL=mysql+mysqlconnector://is213@host.docker.internal:3306/g1t6_patient jthm/patient:g1t6
+# docker run -p 5500:5000 -e dbURL=mysql+mysqlconnector://is213@host.docker.internal:3306/g1t6_patient jthm/patient:g1t6
 
 db = SQLAlchemy(app)
 
