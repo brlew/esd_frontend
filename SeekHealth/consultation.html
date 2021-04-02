@@ -171,7 +171,7 @@
                     <div class="accordion accordion-flush" id="accordionFlushExample">
                       <div class="accordion-item">
                         <h2 class="accordion-header" id="flush-headingOne">
-                          <button id="addconsultdetailBtn" class="appointment-btn collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne" style="position:absolute; right: 70px; top: 300px;">
+                          <button id="addconsultdetailBtn" class="appointment-btn collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne" style="position:absolute; right: 70px; top: 240px;">
                             Add Consultation Details
                           </button>
                         </h2>
@@ -366,6 +366,7 @@
               consultAdded: false,
               addConsultError: "",
               AID: "",
+              desc: true,
               // patientAdded: false,
             },
             methods: {
@@ -485,8 +486,6 @@
                                 this.clearInputField();
                                 document.getElementById("addconsultdetailBtn").setAttribute("aria-expanded", false);
                                 document.getElementById("flush-collapseOne").setAttribute("class", "accordion-collapse collapse");
-
-                                
 
                                 // an alternate way is to add this one element into this.books
                                 break;
