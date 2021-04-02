@@ -23,7 +23,7 @@ doctor_URL = environ.get('doctor_URL') or "http://localhost:5200/doctor"
 # To Run
 # python bookingappt.py 
 # docker build -t borenlew/bookingappt:g1t6_v2 ./
-# docker run -p 5400:5000 borenlew/bookingappt:g1t6_v2
+# docker run -p 5300:5000 borenlew/bookingappt:g1t6_v2
 
 @app.route("/bookingappt/", methods=['POST'])
 def bookingappt():
