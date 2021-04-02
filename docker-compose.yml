@@ -21,7 +21,7 @@ services:
     build:
       context: ./appt
       dockerfile: Dockerfile
-    image: borenlew/appt:g1t6_v2
+    image: jthm/appt:g1t6_v3
     restart: always
     environment:
       dbURL: mysql+mysqlconnector://root@host.docker.internal:3306/g1t6_appt
@@ -35,7 +35,7 @@ services:
     build:
       context: ./prescription
       dockerfile: Dockerfile
-    image: borenlew/prescription:g1t6_v2
+    image: jthm/prescription:g1t6
     restart: always
     environment:
       dbURL: mysql+mysqlconnector://root@host.docker.internal:3306/g1t6_prescription
@@ -48,7 +48,7 @@ services:
     build:
       context: ./patient
       dockerfile: Dockerfile
-    image: borenlew/patient:g1t6_v2
+    image: jthm/patient:g1t6
     restart: always
     environment:
       dbURL: mysql+mysqlconnector://root@host.docker.internal:3306/g1t6_patient
@@ -74,3 +74,23 @@ services:
       PYTHONUNBUFFERED: 1
     ports:
       - "5400:5400"
+
+  consultationinfo:
+    hostname: 'consultationinfo'
+    build:
+      context: ./consultationinfo
+      dockerfile: Dockerfile
+    image: jthm/consultationinfo:g1t6
+    restart: always
+    depends_on:
+    - doctor
+    - patient
+    - prescription
+    - appt
+    environment:
+      patient_URL: http://patient:5500/patient
+      prescription_URL: http://prescription:5300/prescription
+      appt_URL: http://appt:5100/appt/
+      PYTHONUNBUFFERED: 1
+    ports:
+      - "5600:5600"
