@@ -15,6 +15,9 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # docker build -t borenlew/appt:g1t6_v2 ./
 # docker run -p 5100:5000 -e dbURL=mysql+mysqlconnector://root@host.docker.internal:3306/g1t6_appt borenlew/appt:g1t6_v2
 
+# docker build -t jthm/appt:g1t6_v3 ./
+# docker run -p 5700:5000 -e dbURL=mysql+mysqlconnector://root@host.docker.internal:3306/g1t6_appt jthm/appt:g1t6_v3
+
 
 db = SQLAlchemy(app)
 
