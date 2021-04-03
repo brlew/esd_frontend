@@ -192,7 +192,7 @@ def processConsultDetails(consultDetails, pid):
     # Invoke the order microservice
 
     print('\n-----Invoking patient microservice-----')
-    medRec_result = invoke_http(patient_URL + pid + "/" + "medicalRecords", method='POST', json=consultDetails["MedicalRecords"])
+    medRec_result = invoke_http(patient_URL + "/" + pid + "/" + "medicalRecords", method='POST', json=consultDetails["MedicalRecords"])
     print('medRec_result:', medRec_result)
 
     # 4. Record new order
