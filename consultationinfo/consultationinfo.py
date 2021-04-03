@@ -84,7 +84,7 @@ def getPatientMedRec(pid):
 
 def viewPatientMedRec(pid):
     print('\n-----Invoking patient microservice-----')
-    patientMedRec_result = invoke_http(patient_URL + pid, method='GET')
+    patientMedRec_result = invoke_http(patient_URL + "/" + pid, method='GET')
 
     print('patientMedRec_result:', patientMedRec_result)
 
@@ -143,7 +143,7 @@ def getPatientPrescription(pid):
 
 def viewPatientPrescription(pid):
     print('\n-----Invoking prescription microservice-----')
-    patientPrescription_result = invoke_http(prescription_URL + pid, method='GET')
+    patientPrescription_result = invoke_http(prescription_URL + "/" + pid, method='GET')
 
     print('patientPrescription_result:', patientPrescription_result)
 
