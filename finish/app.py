@@ -28,16 +28,14 @@ class User(UserMixin, db.Model):
     mobileno = db.Column(db.Integer)
     dob = db.Column(db.String(15))
 
-
-
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
 
 class LoginForm(FlaskForm):
-    username = StringField('username', validators=[InputRequired(), Length(min=4, max=15)])
-    password = PasswordField('password', validators=[InputRequired(), Length(min=8, max=80)])
-    remember = BooleanField('remember me')
+    username = StringField('Username', validators=[InputRequired(), Length(min=4, max=15)])
+    password = PasswordField('Password', validators=[InputRequired(), Length(min=8, max=80)])
+    remember = BooleanField('Remember me')
 
 class RegisterForm(FlaskForm):
     email = StringField('email', validators=[InputRequired(), Email(message='Invalid email'), Length(max=50)])
@@ -88,7 +86,7 @@ def signup():
 @app.route('/dashboard')
 @login_required
 def dashboard():
-    return render_template('/SeekHealth/dashboard.html', name=current_user.username, id=current_user.id)
+    return render_template('/SeekHealth/dashboard.html', name=current_user.name, id=current_user.id)
 
 @app.route('/logout')
 @login_required
