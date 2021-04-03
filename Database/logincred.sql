@@ -36,16 +36,36 @@ INSERT INTO `patientLogin` (`pUsername`, `pPwd`) VALUES
 
 
 /*--------------------------------------------------------------
-# Table structure for table 'empLogin'
+# Table structure for table 'doctorLogin'
 --------------------------------------------------------------*/
-DROP TABLE IF EXISTS `empLogin`;
-CREATE TABLE IF NOT EXISTS `empLogin` (
-  `eUsername` varchar(50) NOT NULL,
-  `ePwd` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`eUsername`)
+DROP TABLE IF EXISTS `doctorLogin`;
+CREATE TABLE IF NOT EXISTS `doctorLogin` (
+  `dID` int(11) NOT NULL AUTO_INCREMENT,
+  `dName` varchar(50) NOT NULL,
+  `dUsername` varchar(50) NOT NULL,
+  `dPwd` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`dID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table `empLogin`
-INSERT INTO `empLogin` (`eUsername`, `ePwd`) VALUES
-('tom', 'tpwd'),
-('henry', 'hpwd');
+INSERT INTO `doctorLogin` (`dID`, `dUsername`, `dName`, `dPwd`) VALUES
+(1, 'Tom', 'tom123', 'tom123'),
+(2, 'Henry', 'henry123', 'henry123');
+
+
+/*--------------------------------------------------------------
+# Table structure for table 'pharmacistLogin'
+--------------------------------------------------------------*/
+DROP TABLE IF EXISTS `pharmacistLogin`;
+CREATE TABLE IF NOT EXISTS `pharmacistLogin` (
+  `pharID` int(11) NOT NULL AUTO_INCREMENT,
+  `pharName` varchar(50) NOT NULL,
+  `pharUsername` varchar(50) NOT NULL,
+  `pharPwd` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`pharID`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- Dumping data for table `empLogin`
+INSERT INTO `pharmacistLogin` (`pharID`, `pharName`, `pharUsername`, `pharPwd`) VALUES
+(1, 'Li Ying', 'liying', 'liying'),
+(2, 'Bo Ren', 'boren', 'boren');
