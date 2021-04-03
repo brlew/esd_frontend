@@ -5,7 +5,7 @@ from os import environ
 
 app = Flask(__name__)
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root@localhost:3306/patient'
-app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('dbURL') or 'mysql+mysqlconnector://root@localhost:3306/g1t6_patient'
+app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('dbURL') or 'mysql+mysqlconnector://root@localhost:3306/g1t6_logincred'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # TO RUN SERVICE
@@ -14,23 +14,25 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 class Patient(db.Model):
-    __tablename__ = 'patient'
+    __tablename__ = 'patientLogin'
 
     pid = db.Column(db.Integer, primary_key=True)
-    pName = db.Column(db.Integer, nullable=False)
-    pAge = db.Column(db.Integer, nullable=False)
-    pNumber = db.Column(db.Integer, nullable=False)
-    pAddress = db.Column(db.String(100), nullable=False)
-    pAllergies = db.Column(db.String(100), nullable=True)
+    email = db.Column(db.String(50), nullable=False)
+    name = db.Column(db.String(25), nullable=True)
+    partialnric = db.Column(db.String(15),nullable=True)
+    race = db.Column(db.String(15), nullable=True)
+    dob = db.Column(db.String(15), nullable=True)
+    mobileno = db.Column(db.Integer, nullable=True)
 
     def json(self):
         dto = {
             'pid': self.pid,
-            'pName': self.pName,
-            'pAge': self.pAge,
-            'pNumber': self.pNumber,
-            'pAddress': self.pAddress,
-            'pAllergies': self.pAllergies
+            'email': self.email,
+            'name': self.name,
+            'partialnric': self.partialnric,
+            'race': self.race,
+            'dob': self.dob,
+            'mobileno': self.mobileno
         }
 
         dto['medical_record'] = []
@@ -40,10 +42,10 @@ class Patient(db.Model):
         return dto
 
 class Medical_Record(db.Model):
-    __tablename__ = 'medicalrecord'
+    __tablename__ = 'medicalRecord'
 
     pid = db.Column(db.ForeignKey(
-        'patient.pid', ondelete='CASCADE', onupdate='CASCADE'), nullable=False, primary_key=True, index=True)
+        'patientLogin.pid', ondelete='CASCADE', onupdate='CASCADE'), nullable=False, primary_key=True, index=True)
     pDiagnosis = db.Column(db.String(100), nullable=False)
     created = db.Column(db.DateTime, nullable=False, primary_key=True, default=datetime.now)
 
