@@ -90,7 +90,7 @@ services:
     environment:
       patient_URL: http://patient:5500/patient
       prescription_URL: http://prescription:5300/prescription
-      appt_URL: http://appt:5100/appt/
+      doctAppt_URL: http://appt:5100/doctor/appt/
       PYTHONUNBUFFERED: 1
     ports:
       - "5600:5600"
