@@ -67,20 +67,56 @@ def get_all():
     ), 404
 
 
-@app.route("/appt/<int:apptID>/")
-def find_by_apptID(apptID):
-    appt = Appt.query.filter_by(apptID=apptID).first()
-    if appt:
+# @app.route("/appt/<int:apptID>/")
+# def find_by_apptID(apptID):
+#     appt = Appt.query.filter_by(apptID=apptID).first()
+#     if appt:
+#         return jsonify(
+#             {
+#                 "code": 200,
+#                 "data": appt.json()
+#             }
+#         )
+#     return jsonify(
+#         {
+#             "code": 404,
+#             "message": f"Appointment ID {apptID} not found."
+#         }
+#     ), 404
+
+# @app.route("/appt/<int:pID>/")
+# def find_by_pID(pID):
+#     appt = Appt.query.filter_by(pID=pID).first()
+#     if appt:
+#         return jsonify(
+#             {
+#                 "code": 200,
+#                 "data": appt.json()
+#             }
+#         )
+#     return jsonify(
+#         {
+#             "code": 404,
+#             "message": f"Patient's Appointment of {pID} not found."
+#         }
+#     ), 404
+
+@app.route("/appt/<int:pID>/")
+def find_by_pID(pID):
+    apptlist = Appt.query.filter_by(pID=pID).all()
+    if len(apptlist):
         return jsonify(
             {
                 "code": 200,
-                "data": appt.json()
+                "data": {
+                    "appts": [appt.json() for appt in apptlist]
+                }
             }
         )
     return jsonify(
         {
             "code": 404,
-            "message": f"Appointment ID {apptID} not found."
+            "message": "There are no appointments."
         }
     ), 404
 
