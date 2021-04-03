@@ -21,7 +21,7 @@ def getAllApptByDoctorID(did):
 
 def viewAllAppt(did):
     print('\n-----Invoking Appointment microservice-----')
-    doctorAppt_result = invoke_http("http://localhost:5100/doctor/appt/" + did, method='GET')
+    doctorAppt_result = invoke_http("http://localhost:5007/doctor/appt/" + did, method='GET')
 
     print('doctorAppt_result:', doctorAppt_result)
 
