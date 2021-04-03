@@ -17,6 +17,10 @@ For Windows :
     - g1t6_prescription
     - g1t6_logincred
 
+pharmacist: 5600
+- patient ms
+- prescription ms
+
 ### Postman
 4.  Open Postman App and import `ESD_G9T2.postman_collection.json`.
     Run the requests to test the endpoints.
