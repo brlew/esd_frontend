@@ -132,7 +132,7 @@ def dashboard():
 @app.route('/doctordashboard')
 @login_required
 def doctordashboard():
-    return render_template('/SeekHealth/dashboard.html', name=current_user.dUsername, id=current_user.id)
+    return render_template('/SeekHealth/viewDocAppt.html', name=current_user.dUsername, id=current_user.id)
 
 @app.route('/pharmacistdashboard')
 @login_required
