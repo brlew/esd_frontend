@@ -93,4 +93,4 @@ services:
       doctAppt_URL: http://appt:5100/doctor/appt/
       PYTHONUNBUFFERED: 1
     ports:
-      - "5700:5700"
+      - "5600:5600"
