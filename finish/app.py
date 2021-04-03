@@ -1,7 +1,7 @@
 from flask import Flask, render_template, redirect, url_for
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm 
-from wtforms import StringField, PasswordField, BooleanField
+from wtforms import StringField, PasswordField, BooleanField, SelectField
 from wtforms.validators import InputRequired, Email, Length
 from flask_sqlalchemy  import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -16,6 +16,8 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
+ROLE_CHOICES = [('1', 'Patient'), ('2', 'Doctor'), ('3', 'Pharmacist')]
+
 class User(UserMixin, db.Model):
     __tablename__ = 'patientLogin'
     id = db.Column(db.Integer, primary_key=True)
@@ -28,6 +30,13 @@ class User(UserMixin, db.Model):
     mobileno = db.Column(db.Integer)
     dob = db.Column(db.String(15))
 
+class DoctorUser(UserMixin, db.Model):
+    __tablename__ = 'doctorLogin'
+    id = db.Column(db.Integer, primary_key=True)
+    dUsername = db.Column(db.String(15), unique=True)
+    dName = db.Column(db.String(80))
+    dPwd = db.Column(db.String(255))
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
@@ -36,6 +45,8 @@ class LoginForm(FlaskForm):
     username = StringField('Username', validators=[InputRequired(), Length(min=4, max=15)])
     password = PasswordField('Password', validators=[InputRequired(), Length(min=8, max=80)])
     remember = BooleanField('Remember me')
+    role = SelectField(u'Role', choices=ROLE_CHOICES)
+    
 
 class RegisterForm(FlaskForm):
     email = StringField('email', validators=[InputRequired(), Email(message='Invalid email'), Length(max=50)])
@@ -54,18 +65,31 @@ def index():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
+    getRole = form.role.data
+    # Check for roles
 
-    if form.validate_on_submit():
-        user = User.query.filter_by(username=form.username.data).first()
-        if user:
-            if check_password_hash(user.password, form.password.data):
-            # if (user.password==form.password.data):
-                login_user(user, remember=form.remember.data)
-                return redirect(url_for('dashboard'))
+    if (getRole == '1'):
+        if form.validate_on_submit():
+            user = User.query.filter_by(username=form.username.data).first()
+            print(user)
+            if user:
+                if check_password_hash(user.password, form.password.data):
+                # if (user.password==form.password.data):
+                    login_user(user, remember=form.remember.data)
+                    return redirect(url_for('dashboard'))
 
-        return '<h1>Invalid username or password</h1>'
-        #return '<h1>' + form.username.data + ' ' + form.password.data + '</h1>'
+            return '<h1>Invalid username or password</h1>'
+            #return '<h1>' + form.username.data + ' ' + form.password.data + '</h1>'
+    elif (getRole == '2'):
+        if form.validate_on_submit():
+            doctor = DoctorUser.query.filter_by(dUsername=form.username.data).first()
+            if doctor:
+                if (doctor.dPwd == form.password.data):
+                    login_user(doctor, remember=form.remember.data)
+                    return redirect(url_for('dashboard'))
 
+            return '<h1>Invalid username or password</h1>'
+            #return '<h1>' + form.username.data + ' ' + form.password.data + '</h1>'
     return render_template('login.html', form=form)
 
 @app.route('/signup', methods=['GET', 'POST'])
