@@ -10,6 +10,9 @@ from invokes import invoke_http
 app = Flask(__name__)
 CORS(app)
 
+doctAppt_URL = environ.get('doctAppt_URL') or "http://localhost:5100/doctor/appt/"
+patient_URL = environ.get('patient_URL') or "http://localhost:5500/patient"
+prescription_URL = environ.get('prescription_URL') or "http://localhost:5300/prescription"
 # docker run -p 5600:5000 -e dbURL=mysql+mysqlconnector://is213@host.docker.internal:3306 jthm/insert_consultdetails:g1t6
 
 @app.route("/consultDetails/doctor/appt/<string:did>", methods=['GET'])
@@ -21,7 +24,7 @@ def getAllApptByDoctorID(did):
 
 def viewAllAppt(did):
     print('\n-----Invoking Appointment microservice-----')
-    doctorAppt_result = invoke_http("http://localhost:5100/doctor/appt/" + did, method='GET')
+    doctorAppt_result = invoke_http(doctAppt_URL + did, method='GET')
 
     print('doctorAppt_result:', doctorAppt_result)
 
@@ -51,7 +54,7 @@ def getAllPatientMedRec():
 
 def viewAllPatientMedRec():
     print('\n-----Invoking patient microservice-----')
-    patientMedRec_result = invoke_http("http://localhost:5500/patient", method='GET')
+    patientMedRec_result = invoke_http(patient_URL, method='GET')
 
     print('patientMedRec_result:', patientMedRec_result)
 
@@ -81,7 +84,7 @@ def getPatientMedRec(pid):
 
 def viewPatientMedRec(pid):
     print('\n-----Invoking patient microservice-----')
-    patientMedRec_result = invoke_http("http://localhost:5500/patient/" + pid, method='GET')
+    patientMedRec_result = invoke_http(patient_URL + pid, method='GET')
 
     print('patientMedRec_result:', patientMedRec_result)
 
@@ -110,7 +113,7 @@ def getAllPatientPrescription():
 
 def viewAllPatientPrescription():
     print('\n-----Invoking prescription microservice-----')
-    patientPrescription_result = invoke_http("http://localhost:5300/prescription", method='GET')
+    patientPrescription_result = invoke_http(prescription_URL, method='GET')
 
     print('patientPrescription_result:', patientPrescription_result)
 
@@ -140,7 +143,7 @@ def getPatientPrescription(pid):
 
 def viewPatientPrescription(pid):
     print('\n-----Invoking prescription microservice-----')
-    patientPrescription_result = invoke_http("http://localhost:5300/prescription/" + pid, method='GET')
+    patientPrescription_result = invoke_http(prescription_URL + pid, method='GET')
 
     print('patientPrescription_result:', patientPrescription_result)
 
@@ -189,14 +192,14 @@ def processConsultDetails(consultDetails, pid):
     # Invoke the order microservice
 
     print('\n-----Invoking patient microservice-----')
-    medRec_result = invoke_http("http://localhost:5500/patient/" + pid + "/" + "medicalRecords", method='POST', json=consultDetails["MedicalRecords"])
+    medRec_result = invoke_http(patient_URL + pid + "/" + "medicalRecords", method='POST', json=consultDetails["MedicalRecords"])
     print('medRec_result:', medRec_result)
 
     # 4. Record new order
     # record the activity log anyway
 
     print('\n\n-----Invoking prescription microservice-----')
-    prescription_result = invoke_http("http://localhost:5300/prescription", method="POST", json=consultDetails["Prescription"])
+    prescription_result = invoke_http(prescription_URL, method="POST", json=consultDetails["Prescription"])
     print('prescription_result:', prescription_result)
     # - reply from the invocation is not used;
     # continue even if this invocation fails
@@ -222,8 +225,8 @@ def processConsultDetails(consultDetails, pid):
 
 # Execute this program if it is run as a main script (not by 'import')
 if __name__ == "__main__":
-    print("This is flask " + os.path.basename(__file__) + " for placing an order...")
-    app.run(host="0.0.0.0", port=5600, debug=True)
+    print("This is flask " + os.path.basename(__file__) + " processing consultation info")
+    app.run(host="0.0.0.0", port=5700, debug=True)
     # Notes for the parameters:
     # - debug=True will reload the program automatically if a change is detected;
     #   -- it in fact starts two instances of the same flask program,
