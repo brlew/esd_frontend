@@ -16,7 +16,7 @@ db = SQLAlchemy(app)
 class Patient(db.Model):
     __tablename__ = 'patientLogin'
 
-    pid = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(50), nullable=False)
     name = db.Column(db.String(25), nullable=True)
     partialnric = db.Column(db.String(15),nullable=True)
@@ -26,7 +26,7 @@ class Patient(db.Model):
 
     def json(self):
         dto = {
-            'pid': self.pid,
+            'id': self.id,
             'email': self.email,
             'name': self.name,
             'partialnric': self.partialnric,
@@ -44,13 +44,13 @@ class Patient(db.Model):
 class Medical_Record(db.Model):
     __tablename__ = 'medicalRecord'
 
-    pid = db.Column(db.ForeignKey(
-        'patientLogin.pid', ondelete='CASCADE', onupdate='CASCADE'), nullable=False, primary_key=True, index=True)
+    id = db.Column(db.ForeignKey(
+        'patientLogin.id', ondelete='CASCADE', onupdate='CASCADE'), nullable=False, primary_key=True, index=True)
     pDiagnosis = db.Column(db.String(100), nullable=False)
     created = db.Column(db.DateTime, nullable=False, primary_key=True, default=datetime.now)
 
     patient = db.relationship(
-        'Patient', primaryjoin='Medical_Record.pid == Patient.pid', backref='medical_record', 
+        'Patient', primaryjoin='Medical_Record.id == Patient.id', backref='medical_record', 
     )
 
     def json(self):
@@ -81,9 +81,9 @@ def get_all():
         }
     ), 404
 
-@app.route("/patient/<int:pid>")
-def find_by_pid(pid):
-    patient = Patient.query.filter_by(pid=pid).first()
+@app.route("/patient/<int:id>")
+def find_by_id(id):
+    patient = Patient.query.filter_by(id=id).first()
     if patient:
         return jsonify(
             {
@@ -99,21 +99,21 @@ def find_by_pid(pid):
     ), 404
 
 
-@app.route("/patient/<int:pid>", methods=['POST'])
-def create_patient(pid):
-    if (Patient.query.filter_by(pid=pid).first()):
+@app.route("/patient/<int:id>", methods=['POST'])
+def create_patient(id):
+    if (Patient.query.filter_by(id=id).first()):
         return jsonify(
             {
                 "code": 400,
                 "data": {
-                    "pid": pid
+                    "id": id
                 },
                 "message": "Patient already exists."
             }
         ), 400
 
     data = request.get_json()
-    patient = Patient(pid, **data)
+    patient = Patient(id, **data)
 
     try:
         db.session.add(patient)
@@ -123,7 +123,7 @@ def create_patient(pid):
             {
                 "code": 500,
                 "data": {
-                    "pid": pid
+                    "id": id
                 },
                 "message": "An error occurred creating the patient."
             }
@@ -136,11 +136,11 @@ def create_patient(pid):
         }
     ), 201
 
-@app.route("/patient/<int:pid>/medicalRecords", methods=['POST'])
-def create_medRec(pid):
+@app.route("/patient/<int:id>/medicalRecords", methods=['POST'])
+def create_medRec(id):
 
     pDiagnosis = request.json.get('pDiagnosis', None)
-    medRec = Medical_Record(pid=pid, pDiagnosis=pDiagnosis)
+    medRec = Medical_Record(id=id, pDiagnosis=pDiagnosis)
 
     try:
         db.session.add(medRec)
@@ -150,7 +150,7 @@ def create_medRec(pid):
             {
                 "code": 500,
                 "data": {
-                    "pid": pid
+                    "id": id
                 },
                 "message": "An error occurred creating the Medical Records. " + str(e)
             }
