@@ -45,15 +45,15 @@ INSERT INTO `patientLogin` (`id`, `username`, `password`, `email`, `name`, `part
 
 DROP TABLE IF EXISTS `medicalRecord`;
 CREATE TABLE IF NOT EXISTS `medicalRecord` (
-  `pID` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `pDiagnosis` varchar(50),
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`created`, `pID`),
-  KEY `medicalRecord_fk1` (`pID`)
+  PRIMARY KEY (`created`, `id`),
+  KEY `medicalRecord_fk1` (`id`)
 )ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table `medicalRecords`
-INSERT INTO `medicalRecord`(`pID`, `pDiagnosis`) VALUES
+INSERT INTO `medicalRecord`(`id`, `pDiagnosis`) VALUES
 (1, 'Paracetamol');
 (4, 'Paracetamol');
 
