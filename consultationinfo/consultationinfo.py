@@ -10,7 +10,7 @@ from invokes import invoke_http
 app = Flask(__name__)
 CORS(app)
 
-doctAppt_URL = environ.get('doctAppt_URL') or "http://localhost:5100/appt/"
+doctAppt_URL = environ.get('doctAppt_URL') or "http://localhost:5100/doctor/appt/"
 patient_URL = environ.get('patient_URL') or "http://localhost:5500/patient"
 prescription_URL = environ.get('prescription_URL') or "http://localhost:5300/prescription"
 # docker run -p 5600:5000 -e dbURL=mysql+mysqlconnector://is213@host.docker.internal:3306 jthm/insert_consultdetails:g1t6
