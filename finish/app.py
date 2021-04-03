@@ -37,9 +37,16 @@ class DoctorUser(UserMixin, db.Model):
     dName = db.Column(db.String(80))
     dPwd = db.Column(db.String(255))
 
+class PharmacistUser(UserMixin, db.Model):
+    __tablename__ = 'pharmacistLogin'
+    id = db.Column(db.Integer, primary_key=True)
+    pharUsername = db.Column(db.String(15), unique=True)
+    pharName = db.Column(db.String(80))
+    pharPwd = db.Column(db.String(255))
+
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.get(int(user_id))
+    return User.query.get(int(user_id)) or DoctorUser.query.get(int(user_id)) or PharmacistUser.query.get(int(user_id))
 
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[InputRequired(), Length(min=4, max=15)])
@@ -86,7 +93,17 @@ def login():
             if doctor:
                 if (doctor.dPwd == form.password.data):
                     login_user(doctor, remember=form.remember.data)
-                    return redirect(url_for('dashboard'))
+                    return redirect(url_for('doctordashboard'))
+
+            return '<h1>Invalid username or password</h1>'
+
+    elif (getRole == '3'):
+        if form.validate_on_submit():
+            pharmacist = PharmacistUser.query.filter_by(pharUsername=form.username.data).first()
+            if pharmacist:
+                if (pharmacist.pharPwd == form.password.data):
+                    login_user(pharmacist, remember=form.remember.data)
+                    return redirect(url_for('pharmacistdashboard'))
 
             return '<h1>Invalid username or password</h1>'
             #return '<h1>' + form.username.data + ' ' + form.password.data + '</h1>'
@@ -111,6 +128,16 @@ def signup():
 @login_required
 def dashboard():
     return render_template('/SeekHealth/dashboard.html', name=current_user.name, id=current_user.id)
+
+@app.route('/doctordashboard')
+@login_required
+def doctordashboard():
+    return render_template('/SeekHealth/dashboard.html', name=current_user.dUsername, id=current_user.id)
+
+@app.route('/pharmacistdashboard')
+@login_required
+def pharmacistdashboard():
+    return render_template('/SeekHealth/dashboard.html', name=current_user.pharUsername, id=current_user.id)
 
 @app.route('/logout')
 @login_required
