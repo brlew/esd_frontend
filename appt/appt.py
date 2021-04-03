@@ -219,10 +219,6 @@ def update_appt(apptID):
         ), 500
 
 
-
-
-
-
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5007, debug=True)
+    app.run(host='0.0.0.0', port=5100, debug=True)
 
