@@ -129,10 +129,10 @@
       <div id="consult" class="container">
         <div class="row">
           <div id="main">
-            <div style="padding: 10px;">
+            <!-- <div style="padding: 10px;">
               Enter Patient ID: <input v-model="pID" placeholder="Patient ID">
               <button @click="getPatientByID()" type="button" class="appointment-btn">Go</button><br>
-            </div>
+            </div> -->
             
             <div id="navtab" style="display:none">
               <nav>
@@ -147,31 +147,31 @@
                   <div class="container">
                     <div class="row" style="padding: 20px;">
                       <div class="col">
-                          <h5>Patient's ID: {{patients.pid}}</h5>
+                          <h5>Patient's NRIC: {{patients.partialnric}}</h5>
                       </div>
                       <div class="col">
-                          <h5>Name: {{patients.pName}}</h5>
+                          <h5>Name: {{patients.name}}</h5>
                       </div>
                       <div class="col">
-                          <h5>Age: {{patients.pAge}}</h5> 
+                          <h5>Date of Birth: {{patients.dob}}</h5> 
                       </div>
                     </div>
                     <div class="row" style="padding: 20px;">
                       <div class="col">
-                          <h5>Phone No.: {{patients.pNumber}}</h5>
+                          <h5>Phone No.: {{patients.mobileno}}</h5>
                       </div>
                       <div class="col">
-                          <h5>Address: {{patients.pAddress}}</h5>
+                          <h5>Email: {{patients.email}}</h5>
                       </div>
                       <div class="col">
-                          <h5>Patient's Allergies: {{patients.allergies}}</h5> 
+                          <h5>Race: {{patients.race}}</h5> 
                       </div>
                     </div>
                     <hr>
                     <div class="accordion accordion-flush" id="accordionFlushExample">
                       <div class="accordion-item">
                         <h2 class="accordion-header" id="flush-headingOne">
-                          <button id="addconsultdetailBtn" class="appointment-btn collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne" style="position:absolute; right: 70px; top: 300px;">
+                          <button id="addconsultdetailBtn" class="appointment-btn collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne" style="position:absolute; right: 70px; top: 240px;">
                             Add Consultation Details
                           </button>
                         </h2>
@@ -196,32 +196,21 @@
                               </div>
                             </div>
                             <div class="mb-3">
-                              <div class="row">
-                                <div class="col">
-                                  <label for="medCode" class="form-label">Medicine Code</label>
-                                  <input v-model="NewMedCode" type="text" class="form-control" id="medCode">
-                                </div>
-                                <div class="col">
-                                  <label for="medDescription" class="form-label">Medicine Description</label>
-                                  <input v-model="NewMedDescription" type="text" class="form-control" id="medDescription">
-                                </div>
-                              </div>
-                            </div>
-                            <div class="mb-3">
-                              <button @click="addConsultDetails" type="reset" class="appointment-btn" style="position: absolute; right: 110px;">ADD</button><br>
-                              <div class="text-success" v-if="consultAdded">
-                                The consultation details has been successfully added! <br>
-                                <br>
-                              </div>
-                              <div class="text-danger" v-if="addConsultError!=''">
-                                There is a problem adding this consultation details:<br>
-                                {{ addConsultError }}
-                                <br>
-                              </div>
+                              <button @click="addConsultDetails" type="button" class="appointment-btn" style="position: absolute; right: 110px;">ADD</button><br>
                             </div>
                           </div>
                         </div>
                       </div>
+                    </div>
+
+                    <div class="text-success" v-if="consultAdded">
+                      The consultation details has been successfully added! <br>
+                      <br>
+                    </div>
+                    <div class="text-danger" v-if="addConsultError!=''">
+                      There is a problem adding this consultation details:<br>
+                      {{ addConsultError }}
+                      <br>
                     </div>
                   </div>
                 </div>
@@ -247,8 +236,8 @@
                         <th scope="col">Prescription ID</th>
                         <th scope="col">Dosage</th>
                         <th scope="col">Medicine Name</th>
-                        <th scope="col">Medicine Description</th>
-                        <th scope="col">Medicine Code</th>
+                        <!-- <th scope="col">Medicine Description</th>
+                        <th scope="col">Medicine Code</th> -->
                         <th scope="col">Appiontment ID</th>
                       </tr>
                     </thead>
@@ -257,8 +246,8 @@
                         <td>{{ prescript.prescriptionID }}</td>
                         <td>{{ prescript.dosage }}</td>
                         <td>{{ prescript.medName }}</td>
-                        <td>{{ prescript.medDescription }}</td>
-                        <td>{{ prescript.medCode }}</td>
+                        <!-- <td>{{ prescript.medDescription }}</td>
+                        <td>{{ prescript.medCode }}</td> -->
                         <td>{{ prescript.aID }}</td>
                       </tr>
                     </tbody>
@@ -354,8 +343,8 @@
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <script>
-    var serviceURL = "http://localhost:5200/consultDetails";
-    var prescription_URL = "http://localhost:5200/consultDetails/prescription";
+    var serviceURL = "http://localhost:5600/consultDetails";
+    var prescription_URL = "http://localhost:5600/consultDetails/prescription";
 
     var app = new Vue({
             el: "#consult",
@@ -372,10 +361,12 @@
               newDiagnosis: "",
               NewMedName: "",
               NewDosage: "",
-              NewMedCode: "",
-              NewMedDescription: "",
+              // NewMedCode: "",
+              // NewMedDescription: "",
               consultAdded: false,
               addConsultError: "",
+              AID: "",
+              desc: true,
               // patientAdded: false,
             },
             methods: {
@@ -403,9 +394,9 @@
                     console.log("response", this.patients);
                 },
                 getPatientByID: function () {
-                  console.log(this.pID)
+                  console.log(this.PID)
                   const response =
-                  fetch(`${serviceURL}/${this.pID}`)
+                  fetch(`${serviceURL}/${this.PID}`)
                     .then(response => response.json())
                     .then(data => {
                         console.log(response);
@@ -428,7 +419,7 @@
                     });
                     console.log("response", this.patients);
 
-                    fetch(`${prescription_URL}/${this.pID}`)
+                    fetch(`${prescription_URL}/${this.PID}`)
                     .then(response => response.json())
                     .then(data => {
                         console.log(response);
@@ -454,6 +445,7 @@
                     document.getElementById("navtab").style.display = "inline";
                 },
                 addConsultDetails: function () {
+                  console.log("inaddConsult - aid=", this.AID)
                   this.consultAdded = false;
                   this.addConsultError = "";
 
@@ -463,16 +455,14 @@
                     },
                     Prescription: {
                       medName: this.NewMedName,
-                      medDescription: this.NewMedDescription,
                       dosage: this.NewDosage,
-                      medCode: this.NewMedDescription,
-                      pID: this.pID,
-                      aID: 2
+                      pID: this.PID,
+                      aID: this.AID
                     }
                   });
                   console.log(jsonData);
 
-                  fetch(`${serviceURL}/${this.pID}/medicalRecords`,
+                  fetch(`${serviceURL}/${this.PID}/medicalRecords`,
                     {
                         method: "POST",
                         headers: {
@@ -492,7 +482,10 @@
                                 this.consultAdded = true;
 
                                 // refresh book list
-                                this.getPatientByID();
+                                this.getPatientByID(this.PID);
+                                this.clearInputField();
+                                document.getElementById("addconsultdetailBtn").setAttribute("aria-expanded", false);
+                                document.getElementById("flush-collapseOne").setAttribute("class", "accordion-collapse collapse");
 
                                 // an alternate way is to add this one element into this.books
                                 break;
@@ -504,21 +497,27 @@
                                 throw `${data.code}: ${data.message}`;
                         }
                     })
-                    document.getElementById("addconsultdetailBtn").setAttribute("aria-expanded", false);
-                    document.getElementById("addconsultdetailBtn").setAttribute("class", "appointment-btn collapsed");
+                },
+                clearInputField: function () {
+                  console.log("hello");
+                  console.log(document.getElementById("Diagnosis").value)
+                  document.getElementById("Diagnosis").value = "";
+                  document.getElementById("medName").value = "";
+                  document.getElementById("dosage").value = "";
+                  console.log(document.getElementById("Diagnosis").value)
                 }
             },
             created: function () {
-              // this.getAllPatients();
-              // axios.get(serviceURL) 
-              //   .then(response => { //Step 3A: then function handles the success case
-              //       this.patients = response.data.data.patientMedRec_result.data.patients
-              //       console.log("return Data: ", this.patients);
-              //   })
-              //   .catch(error => { //Step 3B: catch handles the failure case
-              //       this.patients = 'There was an error: ' + error.message 
-              //   })
-              //   console.log("Data", this.patients);
+              const queryString = window.location.search;
+              const urlParams = new URLSearchParams(queryString);
+              const pid = urlParams.get('pid')
+              const aid = urlParams.get('aid')
+              console.log("pid=", pid);
+              console.log("aid=", aid);
+              this.AID = aid;
+              this.PID = pid;
+              // console.log("this.pid=", this.pid);
+              this.getPatientByID();
             }
             
   });
