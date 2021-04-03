@@ -88,8 +88,8 @@ services:
     - prescription
     - appt
     environment:
-      patient_URL: http://patient:5500/patient/
-      prescription_URL: http://prescription:5300/prescription/
+      patient_URL: http://patient:5500/patient
+      prescription_URL: http://prescription:5300/prescription
       doctAppt_URL: http://appt:5100/doctor/appt/
       PYTHONUNBUFFERED: 1
     ports:
