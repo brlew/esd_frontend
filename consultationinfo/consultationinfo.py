@@ -11,8 +11,8 @@ app = Flask(__name__)
 CORS(app)
 
 doctAppt_URL = environ.get('doctAppt_URL') or "http://localhost:5100/doctor/appt/"
-patient_URL = environ.get('patient_URL') or "http://localhost:5500/patient/"
-prescription_URL = environ.get('prescription_URL') or "http://localhost:5300/prescription/"
+patient_URL = environ.get('patient_URL') or "http://localhost:5500/patient"
+prescription_URL = environ.get('prescription_URL') or "http://localhost:5300/prescription"
 # docker run -p 5600:5000 -e dbURL=mysql+mysqlconnector://is213@host.docker.internal:3306 jthm/insert_consultdetails:g1t6
 
 @app.route("/consultDetails/doctor/appt/<string:did>", methods=['GET'])
@@ -84,7 +84,7 @@ def getPatientMedRec(pid):
 
 def viewPatientMedRec(pid):
     print('\n-----Invoking patient microservice-----')
-    patientMedRec_result = invoke_http(patient_URL + pid, method='GET')
+    patientMedRec_result = invoke_http(patient_URL + "/" + pid, method='GET')
 
     print('patientMedRec_result:', patientMedRec_result)
 
@@ -143,7 +143,7 @@ def getPatientPrescription(pid):
 
 def viewPatientPrescription(pid):
     print('\n-----Invoking prescription microservice-----')
-    patientPrescription_result = invoke_http(prescription_URL + pid, method='GET')
+    patientPrescription_result = invoke_http(prescription_URL + "/" + pid, method='GET')
 
     print('patientPrescription_result:', patientPrescription_result)
 
