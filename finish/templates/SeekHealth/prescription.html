@@ -17,20 +17,21 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-  <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{url_for('.static', filename='SeekHealth/assets/vendor/animate.css/animate.min.css')}}">
+  <link rel="stylesheet" href="{{url_for('.static', filename='SeekHealth/assets/vendor/bootstrap/css/bootstrap.min.css')}}">
+  <link rel="stylesheet" href="{{url_for('.static', filename='SeekHealth/assets/vendor/bootstrap-icons/bootstrap-icons.css')}}">
+  <link rel="stylesheet" href="{{url_for('.static', filename='SeekHealth/assets/vendor/boxicons/css/boxicons.min.css')}}">
 
-  <!-- <script type="text/javascript" src="vue.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+  <link rel="stylesheet" href="{{url_for('.static', filename='SeekHealth/assets/vendor/fontawesome-free/css/all.min.css')}}">
+  <link rel="stylesheet" href="{{url_for('.static', filename='SeekHealth/assets/vendor/glightbox/css/glightbox.min.css')}}">
+  <link rel="stylesheet" href="{{url_for('.static', filename='SeekHealth/assets/vendor/remixicon/remixicon.css')}}">
+  <link rel="stylesheet" href="{{url_for('.static', filename='SeekHealth/assets/vendor/swiper/swiper-bundle.min.css')}}">
+
 
   <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{url_for('.static', filename='SeekHealth/assets/css/style.css')}}">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.js"></script>
 
   <!-- =======================================================
   * Template Name: Medilab - v4.0.2
@@ -39,8 +40,6 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
 </head>
-<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.js"></script>
 
 <body>
 
@@ -127,6 +126,7 @@
             <button @click="getPrescriptionbyPID()" type="button" class="my-1 btn btn-sm btn-primary">Search</button><br>
             <table class="table table-striped">
               <thead>
+                {% raw %}
                 <tr>
                   <th scope="col">Prescription ID</th>
                   <th scope="col">Dosage</th>
@@ -147,6 +147,7 @@
                   <td>{{ prescript.aID }}</td>
                   <td>{{ prescript.pID }}</td>
                 </tr>
+                {% endraw %}
               </tbody>
             </table>
             <!-- <div class="text-danger" v-if="!hasPatient">{{ message }}</div> -->
@@ -238,7 +239,7 @@
 
 
   <script>
-    var service_URL = "http://localhost:5200/consultDetails/prescription";
+    var service_URL = "http://localhost:5600/consultDetails/prescription";
     // var place_order_URL = "http://localhost:5100/place_order";
 
     var app = new Vue({
@@ -315,14 +316,15 @@
   </script>
 
   <!-- Vendor JS Files -->
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/vendor/purecounter/purecounter.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script type="text/javascript" src="{{ url_for('.static', filename = 'SeekHealth/assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('.static', filename = 'SeekHealth/assets/vendor/glightbox/js/glightbox.min.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('.static', filename = 'SeekHealth/assets/vendor/php-email-form/validate.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('.static', filename = 'SeekHealth/assets/vendor/purecounter/purecounter.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('.static', filename = 'SeekHealth/assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
+  
 
   <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
+  <script type="text/javascript" src="{{ url_for('.static', filename = 'SeekHealth/assets/js/main.js') }}"></script>
 
 </body>
 
