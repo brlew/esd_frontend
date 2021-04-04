@@ -101,7 +101,7 @@ def find_by_id(id):
 
 @app.route("/patient/<int:id>", methods=['POST'])
 def create_patient(id):
-    if (Patient.query.filter_by(id=id).first()):
+    if (Patient.query.filter_by(id=id).all()):
         return jsonify(
             {
                 "code": 400,
