@@ -7,6 +7,10 @@ from flask_sqlalchemy  import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 
+import amqp_setup
+import pika
+import json
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'Thisissupposedtobesecret!'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root@localhost:3306/g1t6_patient'
@@ -71,6 +75,9 @@ def login():
                     login_user(user, remember=form.remember.data)
                     return redirect(url_for('dashboard'))
 
+        createError = "Malicious Access from: " + form.username.data + " tried to access but failed."
+        amqp_setup.channel.basic_publish(exchange=amqp_setup.exchangename, routing_key="#", 
+            body=createError, properties=pika.BasicProperties(delivery_mode = 2)) 
         return '<h1>Invalid username or password</h1>'
 
     return render_template('login.html', form=form)
