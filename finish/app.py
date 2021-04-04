@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, request,
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm 
 from wtforms import StringField, PasswordField, BooleanField, SelectField
@@ -100,7 +100,7 @@ def login():
             if doctor:
                 if (doctor.dPwd == form.password.data):
                     login_user(doctor, remember=form.remember.data)
-                    return redirect(url_for('doctordashboard'))
+                    return redirect(url_for('doctordashboard', id=current_user.id))
 
             return '<h1>Invalid username or password</h1>'
 
@@ -139,6 +139,8 @@ def dashboard():
 @app.route('/doctordashboard')
 @login_required
 def doctordashboard():
+    id = request.args['id']
+    print("id=",id)
     return render_template('/SeekHealth/viewDocAppt.html', name=current_user.dUsername, id=current_user.id)
 
 @app.route('/pharmacistdashboard')
