@@ -125,7 +125,7 @@
           <div id="main">
             <!-- Search by Patient ID: <input v-model="pID" placeholder="Patient ID">
             <button @click="getPrescriptionbyPID()" type="button" class="my-1 btn btn-sm btn-primary">Search</button><br> -->
-            <table class="table table-striped">
+            <table class="table table-striped" v-if="hasAppointment">
               <thead>
                 <tr>
                   <th scope="col">Appiontment ID</th>
@@ -145,7 +145,7 @@
                 </tr>
               </tbody>
             </table>
-            <!-- <div class="text-danger" v-if="!hasPatient">{{ message }}</div> -->
+            <div class="text-primary" v-if="!hasAppointment">{{ message }}</div>
           </div>
         </div>
       </div>
@@ -238,10 +238,15 @@
 
     var app = new Vue({
             el: "#appt",
+            computed: {
+              hasAppointment: function () {
+                return this.appointments.length > 0;
+              }
+            },
             data: {
               dID: "",
               "appointments": [],
-              message: "There is a problem retrieving appointment data, please try again later.",
+              message: "You have no appointment scheduled!",
             },
             methods: {
               getAllAppt: function () {
