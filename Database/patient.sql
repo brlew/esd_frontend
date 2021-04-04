@@ -52,9 +52,9 @@ CREATE TABLE IF NOT EXISTS `medicalRecord` (
 )ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table `medicalRecords`
-INSERT INTO `medicalRecord`(`id`, `pDiagnosis`) VALUES
-(1, 'Paracetamol'),
-(3, 'Paracetamol'),
-(3, 'Covid'),
-(3, 'Fever'),
-(4, 'Paracetamol');
+INSERT INTO `medicalRecord`(`id`, `pDiagnosis`, `created`) VALUES
+(1, 'Paracetamol', '2021-04-04 21:37:54'),
+(3, 'Paracetamol', '2021-04-04 11:37:54'),
+(3, 'Covid', '2021-03-04 15:37:54'),
+(3, 'Fever', '2021-02-04 17:37:54'),
+(4, 'Paracetamol', '2021-04-04 21:37:54');
