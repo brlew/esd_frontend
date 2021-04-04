@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, request,
+from flask import Flask, render_template, redirect, url_for, request
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm 
 from wtforms import StringField, PasswordField, BooleanField, SelectField
@@ -16,7 +16,7 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
-ROLE_CHOICES = [('1', 'Patient'), ('2', 'Doctor'), ('3', 'Pharmacist')]
+ROLE_CHOICES = [('1', 'Patient')]
 
 class User(UserMixin, db.Model):
     __tablename__ = 'patientLogin'
@@ -30,23 +30,9 @@ class User(UserMixin, db.Model):
     mobileno = db.Column(db.Integer)
     dob = db.Column(db.String(15))
 
-class DoctorUser(UserMixin, db.Model):
-    __tablename__ = 'doctorLogin'
-    id = db.Column(db.Integer, primary_key=True)
-    dUsername = db.Column(db.String(15), unique=True)
-    dName = db.Column(db.String(80))
-    dPwd = db.Column(db.String(255))
-
-class PharmacistUser(UserMixin, db.Model):
-    __tablename__ = 'pharmacistLogin'
-    id = db.Column(db.Integer, primary_key=True)
-    pharUsername = db.Column(db.String(15), unique=True)
-    pharName = db.Column(db.String(80))
-    pharPwd = db.Column(db.String(255))
-
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.get(int(user_id)) or DoctorUser.query.get(int(user_id)) or PharmacistUser.query.get(int(user_id))
+    return User.query.get(int(user_id))
 
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[InputRequired(), Length(min=4, max=15)])
@@ -69,13 +55,6 @@ class RegisterForm(FlaskForm):
 def index():
     return render_template('index.html')
 
-@app.route('/doctordashboard/consultation/<string:pid>/<string:aid>')
-def consultation(pid, aid):
-    print(pid, aid)
-    # templs = 'consultation.html?=pid' + pid + '&aid=' + aid
-    # print(templs) 
-    return render_template('consultation.html')
-
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
@@ -93,27 +72,7 @@ def login():
                     return redirect(url_for('dashboard'))
 
             return '<h1>Invalid username or password</h1>'
-            #return '<h1>' + form.username.data + ' ' + form.password.data + '</h1>'
-    elif (getRole == '2'):
-        if form.validate_on_submit():
-            doctor = DoctorUser.query.filter_by(dUsername=form.username.data).first()
-            if doctor:
-                if (doctor.dPwd == form.password.data):
-                    login_user(doctor, remember=form.remember.data)
-                    return redirect(url_for('doctordashboard', id=current_user.id))
 
-            return '<h1>Invalid username or password</h1>'
-
-    elif (getRole == '3'):
-        if form.validate_on_submit():
-            pharmacist = PharmacistUser.query.filter_by(pharUsername=form.username.data).first()
-            if pharmacist:
-                if (pharmacist.pharPwd == form.password.data):
-                    login_user(pharmacist, remember=form.remember.data)
-                    return redirect(url_for('pharmacistdashboard'))
-
-            return '<h1>Invalid username or password</h1>'
-            #return '<h1>' + form.username.data + ' ' + form.password.data + '</h1>'
     return render_template('login.html', form=form)
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -135,18 +94,6 @@ def signup():
 @login_required
 def dashboard():
     return render_template('/SeekHealth/dashboard.html', name=current_user.name, id=current_user.id)
-
-@app.route('/doctordashboard')
-@login_required
-def doctordashboard():
-    id = request.args['id']
-    print("id=",id)
-    return render_template('/SeekHealth/viewDocAppt.html', name=current_user.dUsername, id=current_user.id)
-
-@app.route('/pharmacistdashboard')
-@login_required
-def pharmacistdashboard():
-    return render_template('/SeekHealth/prescription.html', name=current_user.pharUsername, id=current_user.id)
 
 @app.route('/logout')
 @login_required
