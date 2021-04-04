@@ -9,7 +9,7 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'Thisissupposedtobesecret!'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root@localhost:3306/g1t6_logincred'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root@localhost:3306/g1t6_patient'
 bootstrap = Bootstrap(app)
 db = SQLAlchemy(app)
 login_manager = LoginManager()
@@ -19,7 +19,7 @@ login_manager.login_view = 'login'
 ROLE_CHOICES = [('1', 'Patient')]
 
 class User(UserMixin, db.Model):
-    __tablename__ = 'patientLogin'
+    __tablename__ = 'patient'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(15), unique=True)
     email = db.Column(db.String(50), unique=True)
@@ -71,7 +71,7 @@ def login():
                     login_user(user, remember=form.remember.data)
                     return redirect(url_for('dashboard'))
 
-            return '<h1>Invalid username or password</h1>'
+        return '<h1>Invalid username or password</h1>'
 
     return render_template('login.html', form=form)
 
