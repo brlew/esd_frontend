@@ -36,8 +36,8 @@ CREATE TABLE IF NOT EXISTS `prescription` (
 -- Dumping data for table `prescription`
 INSERT INTO `prescription` (`prescriptionID`, `medName`, `dosage`, `pID`, `aID`) VALUES 
 (1, 'amoxicillin', '200mg', 1, 1),
-(2, 'amoxicillin', '200mg', 3, 3),
-(3, 'amoxicillin', '200mg', 3, 6),
+(2, 'vaccine', '200mg', 3, 3),
+(3, 'Docusate', '200mg', 3, 6),
 (4, 'amoxicillin', '200mg', 3, 5);
 
 -- Foreign Key

@@ -146,7 +146,7 @@
                 </tr>
               </tbody>
             </table>
-            <!-- <div class="text-danger" v-if="!hasPatient">{{ message }}</div> -->
+            <!-- <div class="text-primary" v-else>{{ message }}</div> -->
           </div>
         </div>
       </div>
@@ -242,7 +242,7 @@
             data: {
               dID: "",
               "appointments": [],
-              message: "There is a problem retrieving appointment data, please try again later.",
+              message: "You have no appointment scheduled!",
             },
             methods: {
               getAllAppt: function () {
