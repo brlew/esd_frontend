@@ -5,7 +5,7 @@ from os import environ
 
 app = Flask(__name__)
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root@localhost:3306/patient'
-app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('dbURL') or 'mysql+mysqlconnector://root@localhost:3306/g1t6_logincred'
+app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('dbURL') or 'mysql+mysqlconnector://root@localhost:3306/g1t6_patient'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # TO RUN SERVICE
@@ -14,7 +14,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 class Patient(db.Model):
-    __tablename__ = 'patientLogin'
+    __tablename__ = 'patient'
 
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(50), nullable=False)
@@ -45,7 +45,7 @@ class Medical_Record(db.Model):
     __tablename__ = 'medicalRecord'
 
     id = db.Column(db.ForeignKey(
-        'patientLogin.id', ondelete='CASCADE', onupdate='CASCADE'), nullable=False, primary_key=True, index=True)
+        'patient.id', ondelete='CASCADE', onupdate='CASCADE'), nullable=False, primary_key=True, index=True)
     pDiagnosis = db.Column(db.String(100), nullable=False)
     created = db.Column(db.DateTime, nullable=False, primary_key=True, default=datetime.now)
 
