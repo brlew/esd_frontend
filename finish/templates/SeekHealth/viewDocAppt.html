@@ -240,7 +240,7 @@
     var app = new Vue({
             el: "#appt",
             data: {
-              dID: 2,
+              dID: 11,
               "appointments": [],
               message: "There is a problem retrieving appointment data, please try again later.",
             },
@@ -271,7 +271,8 @@
                 },
                 viewPatientDetails: function (pID, aID) {
                   console.log(pID, aID)
-                  window.location.href = '/esd_frontend/SeekHealth/consultation.html?pid=' + pID + '&aid=' + aID;
+                  // window.location.href = '/esd_frontend/finish/templates/SeekHealth/consultation.html?pid=' + pID + '&aid=' + aID;
+                  window.location.href = '/doctordashboard/consultation/' + pID + '/' + aID;
                 }
               },
               created: function () {
