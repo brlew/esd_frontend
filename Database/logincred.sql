@@ -72,8 +72,8 @@ CREATE TABLE IF NOT EXISTS `doctorLogin` (
 
 -- Dumping data for table `empLogin`
 INSERT INTO `doctorLogin` (`id`, `dUsername`, `dName`, `dPwd`) VALUES
-(11, 'Tom', 'tom123', 'tom123'),
-(12, 'Henry', 'henry123', 'henry123');
+(11, 'tommy123', 'Tommy', 'tommy123'),
+(12, 'henry123', 'Henry', 'henry123');
 
 
 /*--------------------------------------------------------------
