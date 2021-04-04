@@ -1,6 +1,10 @@
 # esd_frontend
 
 ## Setup instructions
+###
+- have WAMP running
+- have Docker running
+
 
 ### Database
 For Windows :

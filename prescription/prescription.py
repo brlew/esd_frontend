@@ -51,7 +51,7 @@ def get_all():
             "message": "prescription not found."
         }
     ), 40
- 
+
 @app.route("/prescription/<string:pID>")
 def find_by_pID(pID):
 	# pass
