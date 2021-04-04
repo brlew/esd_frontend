@@ -15,8 +15,8 @@ SET time_zone = "+00:00";
 /*--------------------------------------------------------------
 # Database: `g1t6_logincred`
 --------------------------------------------------------------*/
-CREATE DATABASE IF NOT EXISTS `g1t6_logincred` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `g1t6_logincred`;
+CREATE DATABASE IF NOT EXISTS `g1t6_employee` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `g1t6_employee`;
 
 
 /*--------------------------------------------------------------
