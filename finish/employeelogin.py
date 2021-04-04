@@ -60,10 +60,22 @@ def index():
 
 @app.route('/doctordashboard/consultation/<string:pid>/<string:aid>')
 def consultation(pid, aid):
-    print(pid, aid)
+    print("pid=", pid)
+    print("aid=", aid)
+    
     # templs = 'consultation.html?=pid' + pid + '&aid=' + aid
     # print(templs) 
+    # return render_template('consultation.html')
+    return redirect(url_for('consultationpage', pid=pid, aid=aid))
+
+@app.route('/doctordashboard/consultation')
+def consultationpage():
+    pid = request.args['pid']
+    aid = request.args['aid']
+    print("pid=", pid)
+    print("aid=", aid)
     return render_template('consultation.html')
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
