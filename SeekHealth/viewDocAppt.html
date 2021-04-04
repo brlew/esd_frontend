@@ -239,13 +239,14 @@
     var app = new Vue({
             el: "#appt",
             data: {
-              dID: 2,
+              dID: "",
               "appointments": [],
               message: "There is a problem retrieving appointment data, please try again later.",
             },
             methods: {
               getAllAppt: function () {
                 // on Vue instance created, load the book list
+                console.log(this.dID);
                 const response =
                   fetch(`${service_URL}/${this.dID}`)
                     .then(response => response.json())
@@ -274,6 +275,11 @@
                 }
               },
               created: function () {
+                const queryString = window.location.search;
+                const urlParams = new URLSearchParams(queryString);
+                const docId = urlParams.get('docID');
+                console.log("docID=", docId);
+                this.dID = docId;
                 this.getAllAppt();
               }
             
