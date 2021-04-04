@@ -41,7 +41,7 @@ INSERT INTO `prescription` (`prescriptionID`, `medName`, `dosage`, `pID`, `aID`)
 (4, 'amoxicillin', '200mg', 3, 5);
 
 -- Foreign Key
-ALTER TABLE `prescription`
-  ADD CONSTRAINT `FK_pID` FOREIGN KEY (`pID`) REFERENCES g1t6_patient.patient(`pID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_aID` FOREIGN KEY (`aID`) REFERENCES g1t6_appt.appt(`apptID`) ON DELETE CASCADE ON UPDATE CASCADE;
-COMMIT;
+-- ALTER TABLE `prescription`
+--   ADD CONSTRAINT `FK_pID` FOREIGN KEY (`pID`) REFERENCES g1t6_patient.patient(`pID`) ON DELETE CASCADE ON UPDATE CASCADE,
+--   ADD CONSTRAINT `FK_aID` FOREIGN KEY (`aID`) REFERENCES g1t6_appt.appt(`apptID`) ON DELETE CASCADE ON UPDATE CASCADE;
+-- COMMIT;

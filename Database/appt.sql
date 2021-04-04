@@ -46,8 +46,8 @@ INSERT INTO `appt` (`apptID`, `pID`, `dID`, `timeSlotID`, `apptDateTime`, `apptS
 (6, 2, 12, 6, '2021-08-20 10:00:00', 'confirm', '2020-06-12 02:40:55', '2020-06-12 03:54:34');
 
 -- Foreign Key
-ALTER TABLE `appt`
-  ADD CONSTRAINT `appt_fk1` FOREIGN KEY (`dID`) REFERENCES g1t6_doctor.doctor(`dID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `appt_fk2` FOREIGN KEY (`pID`) REFERENCES g1t6_patient.patient(`pID`) ON DELETE CASCADE ON UPDATE CASCADE;
-COMMIT;
+-- ALTER TABLE `appt`
+--   ADD CONSTRAINT `appt_fk1` FOREIGN KEY (`dID`) REFERENCES g1t6_doctor.doctor(`dID`) ON DELETE CASCADE ON UPDATE CASCADE,
+--   ADD CONSTRAINT `appt_fk2` FOREIGN KEY (`pID`) REFERENCES g1t6_patient.patient(`pID`) ON DELETE CASCADE ON UPDATE CASCADE;
+-- COMMIT;
 
