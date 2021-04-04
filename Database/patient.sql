@@ -35,7 +35,7 @@ CREATE TABLE `patient` (
 
 
 -- Dumping data for table `patientLogin`
-INSERT INTO `patientLogin` (`id`, `username`, `password`, `email`, `name`, `partialnric`, `race`, `dob`, `mobileno`) VALUES
+INSERT INTO `patient` (`id`, `username`, `password`, `email`, `name`, `partialnric`, `race`, `dob`, `mobileno`) VALUES
 (1, 'brlewtest', 'sha256$mGFXdgMi$1e24573419401bb2f72d964c3d4229beddc9ed00355d0683ac31c5a3fab92524', 'brlewtest@brlewtest.com', '', '0', '', '', 0),
 (2, 'seekhealthadmin', 'sha256$cs6f7KtH$dd61931c1ba072e848d7e93eb2e2fe04e0a4f268e4b41c0746400968a4587898', 'seekhealthadmin@f.com', '', '0', '', '', 0),
 (3, 'bwong375', 'sha256$dXmVEk5f$8bbe66ef13d80224223eb14d54f5c5121ca1ab5725a6f1ab10a2bf89e1b44cb1', 'bwong375@gmail.com', 'BERNARD WONG', '*****375C', 'CHINESE', '10 Sep 1948', 97399245),
