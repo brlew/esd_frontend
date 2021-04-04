@@ -69,6 +69,10 @@ class RegisterForm(FlaskForm):
 def index():
     return render_template('index.html')
 
+@app.route('/doctordashboard/consultation/')
+def consultation():
+    return render_template('consultation.html')
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
