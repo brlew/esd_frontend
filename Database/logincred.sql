@@ -54,7 +54,10 @@ CREATE TABLE IF NOT EXISTS `medicalRecord` (
 
 -- Dumping data for table `medicalRecords`
 INSERT INTO `medicalRecord`(`id`, `pDiagnosis`) VALUES
-(1, 'Paracetamol');
+(1, 'Paracetamol'),
+(3, 'Paracetamol'),
+(3, 'Covid'),
+(3, 'Fever'),
 (4, 'Paracetamol');
 
 
