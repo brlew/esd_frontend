@@ -240,7 +240,7 @@
     var app = new Vue({
             el: "#appt",
             data: {
-              dID: 11,
+              dID: "",
               "appointments": [],
               message: "There is a problem retrieving appointment data, please try again later.",
             },
@@ -276,6 +276,12 @@
                 }
               },
               created: function () {
+                const queryString = window.location.search;
+                const urlParams = new URLSearchParams(queryString);
+                const docID = urlParams.get('id')
+                this.dID = docID;
+                console.log("id=", docID);
+                console.log("this.dID=", this.dID);
                 this.getAllAppt();
               }
             
