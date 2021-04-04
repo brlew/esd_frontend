@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `doctor` (
 
 -- Dumping data for table `doctor`
 INSERT INTO `doctor` (`dID`, `dName`, `dDepartment`, `dRoom`) VALUES
-(1, 'Tom', 'Cardiologists', 'Rm3-1'), 
+(1, 'Tommy', 'Cardiologists', 'Rm3-1'), 
 (2, 'Henry', 'Cardiologists', 'Rm3-2'); 
 
 
