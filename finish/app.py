@@ -69,8 +69,11 @@ class RegisterForm(FlaskForm):
 def index():
     return render_template('index.html')
 
-@app.route('/doctordashboard/consultation/')
-def consultation():
+@app.route('/doctordashboard/consultation/<string:pid>/<string:aid>')
+def consultation(pid, aid):
+    print(pid, aid)
+    # templs = 'consultation.html?=pid' + pid + '&aid=' + aid
+    # print(templs) 
     return render_template('consultation.html')
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -136,7 +139,7 @@ def dashboard():
 @app.route('/doctordashboard')
 @login_required
 def doctordashboard():
-    return render_template('/SeekHealth/viewDocAppt.html?docID=' + str(current_user.id), name=current_user.dUsername, id=current_user.id)
+    return render_template('/SeekHealth/viewDocAppt.html', name=current_user.dUsername, id=current_user.id)
 
 @app.route('/pharmacistdashboard')
 @login_required
