@@ -1,7 +1,12 @@
 version: "3.8"
 
+volumes:
+  rabbitmq_data:
+
 services:
- 
+  ####################################
+  # Simple Microservices  
+  ####################################
   doctor:
     hostname: 'doctor'
     build:
@@ -56,6 +61,9 @@ services:
     ports: 
     - "5500:5500"
 
+  ####################################
+  # Complex Microservices  
+  ####################################
   bookingappt:
     hostname: 'bookingappt'
     build:
@@ -94,3 +102,32 @@ services:
       PYTHONUNBUFFERED: 1
     ports:
       - "5600:5600"
+
+  ####################################
+  # RabbitMQ: The messaging broker   
+  ####################################
+  rabbitmq:
+    image: rabbitmq:3-management
+    hostname: esd-rabbit
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes: 
+      - rabbitmq_data:/var/lib/rabbitmq
+
+  #################################################
+  # Activity Log: The Activity Log microservice
+  #################################################
+  activity_log:
+    build:
+      context: ./finish
+      dockerfile: Dockerfile
+    image: veronicateng13/activity_log:g1t6
+    restart: always
+    depends_on:
+      - rabbitmq
+    environment:
+      rabbit_host: rabbitmq
+      rabbit_port: 5672
+      PYTHONUNBUFFERED: 1
