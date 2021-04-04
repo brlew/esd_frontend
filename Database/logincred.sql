@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `medicalRecord` (
   `id` int(11) NOT NULL,
   `pDiagnosis` varchar(50),
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`created`, `id`),
+  KEY (`created`, `id`),
   KEY `medicalRecord_fk1` (`id`)
 )ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
