@@ -21,7 +21,7 @@ USE `g1t6_patient`;
 /*--------------------------------------------------------------
 # Table structure for table 'patientLogin'
 --------------------------------------------------------------*/
-CREATE TABLE `patientLogin` (
+CREATE TABLE `patient` (
   `id` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(255) DEFAULT NULL,
