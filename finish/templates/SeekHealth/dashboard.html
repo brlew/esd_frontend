@@ -197,11 +197,13 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
         // alert(userID)
 ;
         userTimeSlotID = $("#appt_date").val();
+        userdID = $("#doctor").val()
+
         //alert(userTimeSlotID);
 
       $(async() => {
       // Change serviceURL to your own
-      var serviceURL = "http://localhost:5400/bookingappt/statuschange/" + userID + "/" + userTimeSlotID;
+      var serviceURL = "http://localhost:5400/bookingappt/statuschange/" + userID + "/" + userTimeSlotID + "/" + userdID;
       // alert("inside")
       try {
         const response =

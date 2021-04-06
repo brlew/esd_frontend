@@ -152,8 +152,8 @@ def findDoctorAvailabilityByDpt(dptArg):
 
 # Delete Doctor Time Slot
 
-@app.route("/bookingappt/statuschange/<pID>/<timeSlotID>", methods=['POST'])
-def removetimeSlotID(pID, timeSlotID):
+@app.route("/bookingappt/statuschange/<pID>/<timeSlotID>/<dID>", methods=['POST'])
+def removetimeSlotID(pID, timeSlotID, dID):
     result = findTimeSlotIDtoStatus(timeSlotID)
     getTimeSlot = result['data']['doctoravail_result']['data']['timeSlot']
     getTimeSlot = getTimeSlot[:-4]
@@ -162,7 +162,7 @@ def removetimeSlotID(pID, timeSlotID):
     #print("THIS IS THE RESULT: ")
     #print(result['data']['doctoravail_result']['data']['timeSlot'])
     #alert(getDateTime)
-    addTimeSlotIDtoPatientAppt(pID, timeSlotID, getCleanTimeSlot)
+    addTimeSlotIDtoPatientAppt(pID, dID, timeSlotID, getCleanTimeSlot)
     print('\n------------------------')
     print('result: ', result)
     return jsonify(result), result["code"]
@@ -187,7 +187,7 @@ def findTimeSlotIDtoStatus(timeSlotIDArg):
         "data": {
             "doctoravail_result" : doctoravail_result
             },
-        "message": "Successfully deleted Doctor's Timeslot"
+        "message": "Successfully altered Doctor's Timeslot availability"
         }
 
 
@@ -216,7 +216,7 @@ def findTimeSlotIDtoStatus(timeSlotIDArg):
 
 
 
-def addTimeSlotIDtoPatientAppt(pID, timeSlotIDArg, timeSlotDetails):
+def addTimeSlotIDtoPatientAppt(pID, dID, timeSlotIDArg, timeSlotDetails):
     print('\n-----Invoking appt microservice add timeSlotID via POST-----')
     addTS_URL = appt_URL
     add_appt_result = invoke_http(addTS_URL, method='POST', json={"pID":pID,"dID":1,"timeSlotID":timeSlotIDArg,"apptDateTime": timeSlotDetails})

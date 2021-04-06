@@ -119,15 +119,15 @@ services:
   #################################################
   # Activity Log: The Activity Log microservice
   #################################################
-  activity_log:
-    build:
-      context: ./finish
-      dockerfile: Dockerfile
-    image: veronicateng13/activity_log:g1t6
-    restart: always
-    depends_on:
-      - rabbitmq
-    environment:
-      rabbit_host: rabbitmq
-      rabbit_port: 5672
-      PYTHONUNBUFFERED: 1
+  # activity_log:
+  #   build:
+  #     context: ./finish
+  #     dockerfile: Dockerfile
+  #   image: veronicateng13/activity_log:g1t6
+  #   restart: always
+  #   depends_on:
+  #     - rabbitmq
+  #   environment:
+  #     rabbit_host: rabbitmq
+  #     rabbit_port: 5672
+  #     PYTHONUNBUFFERED: 1
