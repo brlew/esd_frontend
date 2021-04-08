@@ -52,183 +52,6 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
 
-  <script>
-    $(async() => {
-      // Change serviceURL to your own
-      var serviceURL = "http://localhost:5400/bookingappt";
-      // alert("inside")
-      try {
-        const response =
-            await fetch(
-                serviceURL, { mode: 'cors', method: 'GET' }
-            );
-        const result = await response.json();
-        console.log(result.code)
-        if (result.code === 201) {
-            var doctorAvail = result.data.doctoravail_result; 
-            doctorsData = doctorAvail.data.doctors
-            var rows = "";
-            allSlot = "";
-
-            listOfDepartments = [];
-
-            for (eachDoctor of doctorsData){
-              eachAvailability = eachDoctor.doct_Availability
-              count = 1    
-
-              getDpt = eachDoctor.dDepartment
-
-              if (!(listOfDepartments.includes(getDpt))){
-                listOfDepartments.push(getDpt);
-              }
-            var rows = "";
-          }
-
-          for (ddpt of listOfDepartments){
-            eachDpt = 
-                `<option value='${ddpt}'>${ddpt}</option>`
-            $('#dDepartment').append(eachDpt);
-          }
-
-        }
-    } catch (error) {
-        showError
-            ('There is a problem retrieving data, please try again later.<br />' + error);
-    }
-    });
-
-  </script>
-  <script>
-
-    function getDptFunc(sel)
-    {
-        //alert(sel.value);
-        userDpt = sel.value;
-
-      $(async() => {
-      // Change serviceURL to your own
-      var serviceURL = "http://localhost:5400/bookingappt/dpt/" + userDpt;
-      // alert("inside")
-      try {
-        const response =
-            await fetch(
-                serviceURL, { mode: 'cors', method: 'GET' }
-            );
-        const result = await response.json();
-        console.log(result.code)
-        if (result.code === 201) {
-            var doctorAvail = result.data.doctoravail_result; 
-            doctorsData = doctorAvail.data.doctors
-            var rows = "";
-            allSlot = "";
-
-            listOfDepartments = [];
-
-            for (eachDoctor of doctorsData){
-              eachAvailability = eachDoctor.doct_Availability
-              count = 1    
-              eachDoc = 
-                  `<option value='${eachDoctor.dID}'>${eachDoctor.dName}</option>`
-            
-            $('#doctor').append(eachDoc);
-            var rows = "";
-          }
-        } 
-    } catch (error) {
-        showError
-            ('There is a problem retrieving data, please try again later.<br />' + error);
-    } // error
-    });
-    }
-
-    function getDocFunc(sel)
-    {
-        //alert(sel.value);
-        userDoc = sel.value;
-
-      $(async() => {
-      // Change serviceURL to your own
-      var serviceURL = "http://localhost:5400/bookingappt/";
-      // alert("inside")
-      try {
-        const response =
-            await fetch(
-                serviceURL, { mode: 'cors', method: 'GET' }
-            );
-        const result = await response.json();
-        console.log(result.code)
-        if (result.code === 201) {
-          var doctorAvail = result.data.doctoravail_result; 
-            doctorsData = doctorAvail.data.doctors
-            var rows = "";
-            allSlot = "";
-
-            for (eachDoctor of doctorsData){
-              eachAvailability = eachDoctor.doct_Availability
-              count = 1    
-            
-              for (eachSlot of eachAvailability){
-                if (eachDoctor.dID == userDoc && eachSlot.bookingStatus == "Available"){
-                  // PLEASE NOTE THERE IS A DIFFERENCE BETWEEN eachSlot VS eachDoctor!!
-                  eachAvailRow = 
-                  `<option value='${eachSlot.timeSlotID}'>${eachSlot.timeSlot}</option>`
-                
-                allSlot += eachAvailRow                
-                count++ 
-                }
-              }
-            $("#appt_date").empty();
-            $('#appt_date').append(allSlot);
-          }
-
-        } 
-    } catch (error) {
-        // Errors when calling the service; such as network error, 
-        // service offline, etc
-        showError
-            ('There is a problem retrieving the data, please try again later.<br />' + error);
-
-    } // error
-    });
-    }
-
-    // Delete Appt
-    function deleteTimeSlotID()
-    {
-        // userdID = $("#doctor").val();
-        // alert(userdID);
-
-        userTimeSlotID = $("#appt_date").val();
-        //alert(userTimeSlotID);
-
-      $(async() => {
-      // Change serviceURL to your own
-      var serviceURL = "http://localhost:5400/bookingappt/statuschange/" + userTimeSlotID;
-      // alert("inside")
-      try {
-        const response =
-            await fetch(
-                serviceURL, { mode: 'cors', method: 'POST' }
-            );
-        const result = await response.json();
-        console.log(result.code)
-        if (result.code === 201) {
-          var doctorAvail = result.data.doctoravail_result; 
-            alert("Your appointment has been made!") 
-        } 
-    } catch (error) {
-        // Errors when calling the service; such as network error, 
-        // service offline, etc
-        showError
-            ('There is a problem retrieving the data, please try again later.<br />' + error);
-
-    } // error
-    });
-    }
-
-
-  </script>
-
 </head>
 
 <body>
@@ -236,6 +59,10 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
   <!-- ======= Top Bar ======= -->
   <div id="topbar" class="d-flex align-items-center fixed-top">
     <div class="container d-flex justify-content-between">
+      <div class="contact-info d-flex align-items-center">
+        <i class="bi bi-envelope"></i> <a href="mailto:contact@example.com">g1t6@sis.smu.edu.sg</a>
+        <i class="bi bi-phone"></i> +65 98765432
+      </div>
       <div class="d-none d-lg-flex social-links align-items-center">
         <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
         <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
@@ -244,7 +71,6 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
       </div>
     </div>
   </div>
-
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
@@ -259,7 +85,7 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav>
 
-      <a href="#appointment" class="appointment-btn scrollto"><span class="d-none d-md-inline">Make an</span> Appointment</a>
+      <a href="#appointment" class="appointment-btn scrollto"><span class="d-none d-md-inline">Log</span> Out</a>
 
     </div>
   </header>
@@ -268,7 +94,7 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
     <div class="container">
       <h1>Welcome to SeekHealth</h1>
       <h2>We are team G1T6 providing you with only the best</h2>
-      <a href="#about" class="btn-get-started scrollto">Get Started</a>
+      <a href="#appointment" class="btn-get-started scrollto">Make Appointment</a>
     </div>
   </section>
 
@@ -279,7 +105,7 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
       <div class="container">
 
         <div class="row">
-          <div class="col-lg-4 d-flex align-items-stretch">
+          <div class="col d-flex align-items-stretch">
             <div class="content">
               <h3>Why Choose SeekHealth?</h3>
               <p>
@@ -290,26 +116,7 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
               </div>
             </div>
           </div>
-          <div class="col-lg-8 d-flex align-items-stretch">
-            <div class="icon-boxes d-flex flex-column justify-content-center">
-              <div class="row">
-                <div class="col-xl-4 d-flex align-items-stretch">
-                  <div class="icon-box mt-4 mt-xl-0">
-                    <i class="bx bx-receipt"></i>
-                    <h4>Updates</h4>
-                    <p>We know you will choose us for care</p>
-                  </div>
-                </div>
-                <div class="col-xl-4 d-flex align-items-stretch">
-                  <div class="icon-box mt-4 mt-xl-0">
-                    <i class="bx bx-cube-alt"></i>
-                    <h4>Ullamco laboris ladore pan</h4>
-                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt</p>
-                  </div>
-                </div>
-              </div>
-            </div><!-- End .content-->
-          </div>
+          
         </div>
 
       </div>
@@ -391,53 +198,225 @@ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706t
 
       </div>
     </section>
+    <script>
+      $(async() => {
+        // Change serviceURL to your own
+        var serviceURL = "http://localhost:5400/bookingappt";
+        // alert("inside")
+        try {
+          const response =
+              await fetch(
+                  serviceURL, { mode: 'cors', method: 'GET' }
+              );
+          const result = await response.json();
+          console.log(result.code)
+          if (result.code === 201) {
+              var doctorAvail = result.data.doctoravail_result; 
+              doctorsData = doctorAvail.data.doctors
+              var rows = "";
+              allSlot = "";
+  
+              listOfDepartments = [];
+  
+              for (eachDoctor of doctorsData){
+                eachAvailability = eachDoctor.doct_Availability
+                count = 1    
+  
+                getDpt = eachDoctor.dDepartment
+  
+                if (!(listOfDepartments.includes(getDpt))){
+                  listOfDepartments.push(getDpt);
+                }
+              var rows = "";
+            }
+  
+            for (ddpt of listOfDepartments){
+              eachDpt = 
+                  `<option value='${ddpt}'>${ddpt}</option>`
+              $('#dDepartment').append(eachDpt);
+            }
+  
+          }
+      } catch (error) {
+          showError
+              ('There is a problem retrieving data, please try again later.<br />' + error);
+      }
+      });
+  
+    </script>
+    <script>
+  
+      function getDptFunc(sel)
+      {
+          //alert(sel.value);
+          userDpt = sel.value;
+  
+        $(async() => {
+        // Change serviceURL to your own
+        var serviceURL = "http://localhost:5400/bookingappt/dpt/" + userDpt;
+        // alert("inside")
+        try {
+          const response =
+              await fetch(
+                  serviceURL, { mode: 'cors', method: 'GET' }
+              );
+          const result = await response.json();
+          console.log(result.code)
+          if (result.code === 201) {
+              var doctorAvail = result.data.doctoravail_result; 
+              doctorsData = doctorAvail.data.doctors
+              var rows = "";
+              allSlot = "";
+  
+              listOfDepartments = [];
+  
+              for (eachDoctor of doctorsData){
+                eachAvailability = eachDoctor.doct_Availability
+                count = 1    
+                eachDoc = 
+                    `<option value='${eachDoctor.dID}'>${eachDoctor.dName}</option>`
+              
+              $('#doctor').append(eachDoc);
+              var rows = "";
+            }
+          } 
+      } catch (error) {
+          showError
+              ('There is a problem retrieving data, please try again later.<br />' + error);
+      } // error
+      });
+      }
+  
+      function getDocFunc(sel)
+      {
+          //alert(sel.value);
+          userDoc = sel.value;
+  
+        $(async() => {
+        // Change serviceURL to your own
+        var serviceURL = "http://localhost:5400/bookingappt/";
+        // alert("inside")
+        try {
+          const response =
+              await fetch(
+                  serviceURL, { mode: 'cors', method: 'GET' }
+              );
+          const result = await response.json();
+          console.log(result.code)
+          if (result.code === 201) {
+            var doctorAvail = result.data.doctoravail_result; 
+              doctorsData = doctorAvail.data.doctors
+              var rows = "";
+              allSlot = "";
+  
+              for (eachDoctor of doctorsData){
+                eachAvailability = eachDoctor.doct_Availability
+                count = 1    
+              
+                for (eachSlot of eachAvailability){
+                  if (eachDoctor.dID == userDoc && eachSlot.bookingStatus == "Available"){
+                    // PLEASE NOTE THERE IS A DIFFERENCE BETWEEN eachSlot VS eachDoctor!!
+                    eachAvailRow = 
+                    `<option value='${eachSlot.timeSlotID}'>${eachSlot.timeSlot}</option>`
+                  
+                  allSlot += eachAvailRow                
+                  count++ 
+                  }
+                }
+              $("#appt_date").empty();
+              $('#appt_date').append(allSlot);
+            }
+  
+          } 
+      } catch (error) {
+          // Errors when calling the service; such as network error, 
+          // service offline, etc
+          showError
+              ('There is a problem retrieving the data, please try again later.<br />' + error);
+  
+      } // error
+      });
+      }
+  
+      // Delete Appt
+      function deleteTimeSlotID()
+      {
+          // userdID = $("#doctor").val();
+          // alert(userdID);
+  
+          userTimeSlotID = $("#appt_date").val();
+          //alert(userTimeSlotID);
+  
+        $(async() => {
+        // Change serviceURL to your own
+        var serviceURL = "http://localhost:5400/bookingappt/statuschange/" + userTimeSlotID;
+        // alert("inside")
+        try {
+          const response =
+              await fetch(
+                  serviceURL, { mode: 'cors', method: 'POST' }
+              );
+          const result = await response.json();
+          console.log(result.code)
+          if (result.code === 201) {
+            var doctorAvail = result.data.doctoravail_result; 
+              alert("Your appointment has been made!") 
+          } 
+      } catch (error) {
+          // Errors when calling the service; such as network error, 
+          // service offline, etc
+          showError
+              ('There is a problem retrieving the data, please try again later.<br />' + error);
+  
+      } // error
+      });
+      }
+  
+  
+    </script>
+  
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
 
-  <!-- ======= Footer ======= -->
-  <footer id="footer">
-
-    <div class="footer-top">
-      <div class="container">
-        <div class="row">
-
-          <div class="col-lg-3 col-md-6 footer-contact">
-            <h3>SeekHealth</h3>
-            <p>
-              <strong>Email:</strong>G1t6@sis.smu.edu.sg<br>
-            </p>
-          </div>
-
-          <div class="col-lg-2 col-md-6 footer-links">
-            <h4>Useful Links</h4>
-            <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
-            </ul>
+      <div class="footer-top">
+        <div class="container">
+          <div class="row">
+  
+            <div class="col-lg-3 col-md-6 footer-contact">
+              <h3>SeekHealth</h3>
+              <p>
+                <strong>Email:</strong>G1t6@sis.smu.edu.sg<br>
+              </p>
+            </div>
+  
+            <div class="col-lg-2 col-md-6 footer-links">
+              <h4>Useful Links</h4>
+              <ul>
+                <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
+              
+              </ul>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-
-    <div class="container d-md-flex py-4">
-
-      <div class="me-md-auto text-center text-md-start">
-        <div class="copyright">
-          &copy; Copyright <strong><span>SeekHealth G1T6</span></strong>. All Rights Reserved
-        </div>
-        <div class="credits">
+  
+      <div class="container d-md-flex py-4">
+  
+        <div class="me-md-auto text-center text-md-start">
+          <div class="copyright">
+            &copy; Copyright <strong><span>SeekHealth G1T6</span></strong>. All Rights Reserved
+          </div>
+          <div class="credits">
+            <!-- All the links in the footer should remain intact. -->
+            <!-- You can delete the links only if you purchased the pro version. -->
+            <!-- Licensing information: https://bootstrapmade.com/license/ -->
+            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/medilab-free-medical-bootstrap-theme/ -->
+            
+          </div>
         </div>
       </div>
-      <!-- <div class="social-links text-center text-md-right pt-3 pt-md-0">
-        <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-        <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-        <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-        <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-        <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-      </div> -->
-    </div>
-  </footer><!-- End Footer -->
+    </footer><!-- End Footer -->
 
   <div id="preloader"></div>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
