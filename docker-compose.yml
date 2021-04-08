@@ -103,6 +103,20 @@ services:
     ports:
       - "5600:5600"
 
+  employeelogin:
+    hostname: 'employeelogin'
+    build:
+      context: ./finish
+      dockerfile: Dockerfile
+    image: borenlew/employeelogin:g1t6_v2
+    restart: always
+    environment:
+      dbURL: mysql+mysqlconnector://root@host.docker.internal:3306/g1t6_employee
+      PYTHONUNBUFFERED: 1
+    ports: 
+    - "5900:5900"
+    # hostname: 'appt'
+
   ####################################
   # RabbitMQ: The messaging broker   
   ####################################
@@ -119,15 +133,15 @@ services:
   #################################################
   # Activity Log: The Activity Log microservice
   #################################################
-  # activity_log:
-  #   build:
-  #     context: ./finish
-  #     dockerfile: Dockerfile
-  #   image: veronicateng13/activity_log:g1t6
-  #   restart: always
-  #   depends_on:
-  #     - rabbitmq
-  #   environment:
-  #     rabbit_host: rabbitmq
-  #     rabbit_port: 5672
-  #     PYTHONUNBUFFERED: 1
+  login_log:
+    build:
+      context: ./login_log
+      dockerfile: Dockerfile
+    image: borenlew/login_log:g1t6_v2
+    restart: always
+    depends_on:
+      - rabbitmq
+    environment:
+      rabbit_host: rabbitmq
+      rabbit_port: 5672
+      PYTHONUNBUFFERED: 1
