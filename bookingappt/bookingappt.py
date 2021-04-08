@@ -219,7 +219,7 @@ def findTimeSlotIDtoStatus(timeSlotIDArg):
 def addTimeSlotIDtoPatientAppt(pID, dID, timeSlotIDArg, timeSlotDetails):
     print('\n-----Invoking appt microservice add timeSlotID via POST-----')
     addTS_URL = appt_URL
-    add_appt_result = invoke_http(addTS_URL, method='POST', json={"pID":pID,"dID":1,"timeSlotID":timeSlotIDArg,"apptDateTime": timeSlotDetails})
+    add_appt_result = invoke_http(addTS_URL, method='POST', json={"pID":pID,"dID":dID,"timeSlotID":timeSlotIDArg,"apptDateTime": timeSlotDetails})
 
     print('add_appt_result:', add_appt_result)
 
