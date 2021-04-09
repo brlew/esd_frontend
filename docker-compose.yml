@@ -167,7 +167,7 @@ services:
 
   singpass:
     build:
-      context: ./singpass-verify/sg-verify-demo-app
+      context: ./sg-verify-demo-app
       dockerfile: Dockerfile
     image: borenlew/singpass:g1t6_v2
     restart: always
