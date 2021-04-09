@@ -164,3 +164,15 @@ services:
       rabbit_host: rabbitmq
       rabbit_port: 5672
       PYTHONUNBUFFERED: 1
+
+  singpass:
+    build:
+      context: ./singpass-verify/sg-verify-demo-app
+      dockerfile: Dockerfile
+    image: borenlew/singpass:g1t6_v2
+    restart: always
+    ports:
+      - "3001:3001"
+      - "3002:3002"
+      - "3003:3003"
+      - "3004:3004"
