@@ -103,11 +103,29 @@ services:
     ports:
       - "5600:5600"
 
+  patientlogin:
+    hostname: 'patientlogin'
+    build:
+      context: ./finish
+      dockerfile: patientlogin.Dockerfile
+    image: borenlew/patientlogin:g1t6_v2
+    restart: always
+    ports: 
+    - "5800:5800"
+    depends_on:
+      - rabbitmq
+    environment:
+      dbURL: mysql+mysqlconnector://root@host.docker.internal:3306/g1t6_patient
+      PYTHONUNBUFFERED: 1
+      rabbit_host: rabbitmq
+      rabbit_port: 5672
+      PYTHONUNBUFFERED: 1
+
   employeelogin:
     hostname: 'employeelogin'
     build:
       context: ./finish
-      dockerfile: Dockerfile
+      dockerfile: emplogin.Dockerfile
     image: borenlew/employeelogin:g1t6_v2
     restart: always
     environment:
@@ -115,7 +133,8 @@ services:
       PYTHONUNBUFFERED: 1
     ports: 
     - "5900:5900"
-    # hostname: 'appt'
+
+
 
   ####################################
   # RabbitMQ: The messaging broker   
