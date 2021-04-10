@@ -4,9 +4,9 @@ volumes:
   rabbitmq_data:
 
 services:
-  ####################################
-  # Simple Microservices  
-  ####################################
+  ###################################
+  #Simple Microservices  
+  ###################################
   doctor:
     hostname: 'doctor'
     build:
@@ -170,6 +170,8 @@ services:
       context: ./singpass-verify/sg-verify-demo-app
       dockerfile: Dockerfile
     image: borenlew/singpass:g1t6_v2
+    volumes:
+      - ./singpass-verify/sg-verify-demo-app:/usr/src/app
     restart: always
     ports:
       - "3001:3001"
