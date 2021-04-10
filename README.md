@@ -23,9 +23,9 @@ For Windows :
 
 
 ### Postman
-4.  Open Postman App and import `ESD_G9T2.postman_collection.json`.
-    Run the requests to test the endpoints.
-
+4.  Open Postman App and import `ESD_G9T2.postman_collection.json`. Run the requests to test the endpoints.
+    Alternatively, access SeekHealth's API through https://documenter.getpostman.com/view/12748512/TzCQcnSk#dc506403-f9e6-47c9-8ec7-2a61ce658a0e.
+    
 ### Docker
 5.  Build the docker images.
     ```
@@ -66,6 +66,20 @@ For Windows :
 
 
 ### Others
+py files
+appt
+    - appt.py: appt/appt.py
+doctor
+    - doctor.py: doctor/doctor.py
+employee
+    - employeelogin.py: finish/employeelogin.py
+patient
+    - patient.py: patient/patient.py
+    - patientlogin.py: finish/patientlogin.py
+prescription
+    - prescription.py: prescription/prescription.py
+
+
 pharmacist: 5600
 - patient ms
 - prescription ms

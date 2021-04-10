@@ -1,250 +1,2623 @@
 {
 	"info": {
 		"_postman_id": "49e7959a-ddf6-4c69-a102-77a33cc40644",
-		"name": "ESD_G1T6",
+		"name": "G1T6 SeekHealth API",
+		"description": "SeekHealth is our effort to allow healthcare providers to aggregate thousands of appointments and consultation information. The SeekHealth API allows healthcare providers to bring features for both their internal and external users. \n\n# Features\nThe SeekHealth API provides you programmatic access to many of the operations available on SeekHealth website. These features are utilized by both internal and external users.\n\n|   Patient                       | Doctor                          | Pharmacist    |\n| -------------                   |:-------------:                  |:-------------:|\n| login/logout                    | login/logout                    | login/logout |\n| sign up                         | view all scheduled appointments | view all prescriptions    |\n| view available time slots       | view patient's details          |     |\n| book an appointment             | create consultation information |     |\n| view all scheduled appointments |      |    |\n\n\n# Structure\nThe SeekHealth API comprises of 5 simple micro-services (SMS) and 2 complex micro-services (CMS).\n\n\n# Instructions\nEach method have multiple examples (e.g. successful operation, no appointment). To view the examples, please click on the dropdown button under **Example Request**.\n\nThe API documentation can be either viewed in two ways:\n* <a href=\"https://documenter.getpostman.com/view/12748512/TzCQcnSk#dc506403-f9e6-47c9-8ec7-2a61ce658a0e\">web</a>\n* download JSON file (under /esd_frontend folder)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Appt - get all",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:5000/appt",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5000",
-					"path": [
-						"appt"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Appt - get one",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:5100/appt/9",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5100",
-					"path": [
-						"appt",
-						"9"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Appt - create",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"pID\": 1,\r\n    \"dID\": 1,\r\n    \"apptDateTime\": \"2020-06-12 02:14:55\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "SMS",
+			"item": [
+				{
+					"name": "Appointment",
+					"item": [
+						{
+							"name": "get all appointments",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5100/appt",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5100",
+									"path": [
+										"appt"
+									]
+								},
+								"description": "1. successful operation\n1. no appointments"
+							},
+							"response": [
+								{
+									"name": "success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:5100/appt",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5100",
+											"path": [
+												"appt"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "1840"
+										},
+										{
+											"key": "Server",
+											"value": "Werkzeug/1.0.1 Python/3.9.3"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 06 Apr 2021 09:14:37 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"code\": 200,\n    \"data\": {\n        \"appts\": [\n            {\n                \"apptDateTime\": \"Tue, 31 Aug 2021 04:30:00 GMT\",\n                \"apptID\": 1,\n                \"apptStatus\": \"confirm\",\n                \"created\": \"Fri, 12 Jun 2020 09:23:55 GMT\",\n                \"dID\": 11,\n                \"modified\": \"Fri, 12 Jun 2020 10:14:43 GMT\",\n                \"pID\": 1,\n                \"timeSlotID\": 1\n            },\n            {\n                \"apptDateTime\": \"Fri, 17 Sep 2021 05:00:00 GMT\",\n                \"apptID\": 2,\n                \"apptStatus\": \"confirm\",\n                \"created\": \"Fri, 12 Jun 2020 10:14:43 GMT\",\n                \"dID\": 11,\n                \"modified\": \"Fri, 12 Jun 2020 10:50:23 GMT\",\n                \"pID\": 2,\n                \"timeSlotID\": 2\n            },\n            {\n                \"apptDateTime\": \"Tue, 17 Aug 2021 04:30:00 GMT\",\n                \"apptID\": 3,\n                \"apptStatus\": \"confirm\",\n                \"created\": \"Fri, 12 Jun 2020 11:14:56 GMT\",\n                \"dID\": 11,\n                \"modified\": \"Fri, 12 Jun 2020 13:34:45 GMT\",\n                \"pID\": 3,\n                \"timeSlotID\": 3\n            },\n            {\n                \"apptDateTime\": \"Fri, 10 Sep 2021 02:30:00 GMT\",\n                \"apptID\": 4,\n                \"apptStatus\": \"confirm\",\n                \"created\": \"Fri, 12 Jun 2020 13:20:34 GMT\",\n                \"dID\": 12,\n                \"modified\": \"Fri, 12 Jun 2020 14:54:32 GMT\",\n                \"pID\": 4,\n                \"timeSlotID\": 4\n            },\n            {\n                \"apptDateTime\": \"Tue, 17 Aug 2021 04:30:00 GMT\",\n                \"apptID\": 5,\n                \"apptStatus\": \"confirm\",\n                \"created\": null,\n                \"dID\": 12,\n                \"modified\": \"Fri, 12 Jun 2020 19:14:32 GMT\",\n                \"pID\": 1,\n                \"timeSlotID\": 5\n            },\n            {\n                \"apptDateTime\": \"Fri, 20 Aug 2021 10:00:00 GMT\",\n                \"apptID\": 6,\n                \"apptStatus\": \"confirm\",\n                \"created\": \"Fri, 12 Jun 2020 10:40:55 GMT\",\n                \"dID\": 12,\n                \"modified\": \"Fri, 12 Jun 2020 11:54:34 GMT\",\n                \"pID\": 2,\n                \"timeSlotID\": 6\n            }\n        ]\n    }\n}"
+								},
+								{
+									"name": "no appt",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:5100/appt",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5100",
+											"path": [
+												"appt"
+											]
+										}
+									},
+									"status": "NOT FOUND",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "62"
+										},
+										{
+											"key": "Server",
+											"value": "Werkzeug/1.0.1 Python/3.9.4"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 09 Apr 2021 14:42:44 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"code\": 404,\n    \"message\": \"There are no appointments.\"\n}"
+								}
+							]
+						},
+						{
+							"name": "get one appointment",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5100/appt/13",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5100",
+									"path": [
+										"appt",
+										"13"
+									]
+								},
+								"description": "1. successful operation\n1. no appointments"
+							},
+							"response": [
+								{
+									"name": "success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:5100/appt/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5100",
+											"path": [
+												"appt",
+												"1"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "628"
+										},
+										{
+											"key": "Server",
+											"value": "Werkzeug/1.0.1 Python/3.9.3"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 06 Apr 2021 09:23:49 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"code\": 200,\n    \"data\": {\n        \"appts\": [\n            {\n                \"apptDateTime\": \"Fri, 12 Jun 2020 02:14:51 GMT\",\n                \"apptID\": 1,\n                \"apptStatus\": \"TEST\",\n                \"created\": \"Fri, 12 Jun 2020 09:23:55 GMT\",\n                \"dID\": 1,\n                \"modified\": \"Tue, 06 Apr 2021 09:14:58 GMT\",\n                \"pID\": 1,\n                \"timeSlotID\": 1\n            },\n            {\n                \"apptDateTime\": \"Tue, 17 Aug 2021 04:30:00 GMT\",\n                \"apptID\": 5,\n                \"apptStatus\": \"confirm\",\n                \"created\": null,\n                \"dID\": 12,\n                \"modified\": \"Fri, 12 Jun 2020 19:14:32 GMT\",\n                \"pID\": 1,\n                \"timeSlotID\": 5\n            }\n        ]\n    }\n}"
+								},
+								{
+									"name": "no appt with stated ID",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:5100/appt/13",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5100",
+											"path": [
+												"appt",
+												"13"
+											]
+										}
+									},
+									"status": "NOT FOUND",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "62"
+										},
+										{
+											"key": "Server",
+											"value": "Werkzeug/1.0.1 Python/3.9.4"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 09 Apr 2021 14:32:53 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"code\": 404,\n    \"message\": \"There are no appointments.\"\n}"
+								}
+							]
+						},
+						{
+							"name": "create an appointment (success)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"pID\": 1,\r\n    \"dID\": 1,\r\n    \"apptDateTime\": \"2020-06-12 02:14:55\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5100/appt/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5100",
+									"path": [
+										"appt",
+										""
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "correct inputs",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"pID\": 1,\r\n    \"dID\": 1,\r\n    \"timeSlotID\": 7,\r\n    \"apptDateTime\": \"2021-08-21 12:00:00\",\r\n    \"apptStatus\": \"confirm\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5100/appt/",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5100",
+											"path": [
+												"appt",
+												""
+											]
+										}
+									},
+									"status": "CREATED",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "287"
+										},
+										{
+											"key": "Server",
+											"value": "Werkzeug/1.0.1 Python/3.9.4"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 09 Apr 2021 14:31:41 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"code\": 201,\n    \"data\": {\n        \"apptDateTime\": \"Sat, 21 Aug 2021 12:00:00 GMT\",\n        \"apptID\": 7,\n        \"apptStatus\": \"pending\",\n        \"created\": \"Fri, 09 Apr 2021 14:31:42 GMT\",\n        \"dID\": 1,\n        \"modified\": \"Fri, 09 Apr 2021 14:31:42 GMT\",\n        \"pID\": 1,\n        \"timeSlotID\": 7\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "create an appointment (failure)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"pID\": 1,\r\n    \"dID\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5100/appt/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5100",
+									"path": [
+										"appt",
+										""
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "wrong inputs",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"pID\": 1,\r\n    \"dID\": 1\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5100/appt/",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5100",
+											"path": [
+												"appt",
+												""
+											]
+										}
+									},
+									"status": "INTERNAL SERVER ERROR",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "525"
+										},
+										{
+											"key": "Server",
+											"value": "Werkzeug/1.0.1 Python/3.9.4"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 10 Apr 2021 00:39:39 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"code\": 500,\n    \"message\": \"An error occurred creating the appointment. (mysql.connector.errors.OperationalError) MySQL Connection not available.\\n[SQL: INSERT INTO appt (`pID`, `dID`, `apptDateTime`, `apptStatus`, created, modified, `timeSlotID`) VALUES (%(pID)s, %(dID)s, %(apptDateTime)s, %(apptStatus)s, %(created)s, %(modified)s, %(timeSlotID)s)]\\n[parameters: [{'dID': 1, 'pID': 1, 'apptStatus': 'pending', 'apptDateTime': None, 'timeSlotID': None}]]\\n(Background on this error at: http://sqlalche.me/e/13/e3q8)\"\n}"
+								}
+							]
+						},
+						{
+							"name": "update an appointment (success)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"pID\": 1,\r\n    \"dID\": 1,\r\n    \"apptDateTime\": \"2020-06-12 02:14:51\",\r\n    \"apptStatus\": \"TEST\"\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:5100/appt/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5100",
+									"path": [
+										"appt",
+										"1"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "correct inputs",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"pID\": 1,\r\n    \"dID\": 1,\r\n    \"apptDateTime\": \"2020-06-12 02:14:51\",\r\n    \"apptStatus\": \"TEST\"\r\n}"
+										},
+										"url": {
+											"raw": "http://localhost:5100/appt/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5100",
+											"path": [
+												"appt",
+												"1"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "284"
+										},
+										{
+											"key": "Server",
+											"value": "Werkzeug/1.0.1 Python/3.9.3"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 06 Apr 2021 09:14:58 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"code\": 200,\n    \"data\": {\n        \"apptDateTime\": \"Fri, 12 Jun 2020 02:14:51 GMT\",\n        \"apptID\": 1,\n        \"apptStatus\": \"TEST\",\n        \"created\": \"Fri, 12 Jun 2020 09:23:55 GMT\",\n        \"dID\": 1,\n        \"modified\": \"Tue, 06 Apr 2021 09:14:58 GMT\",\n        \"pID\": 1,\n        \"timeSlotID\": 1\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "update an appointment (failure)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": []
+								},
+								"url": {
+									"raw": "http://localhost:5100/appt/13",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5100",
+									"path": [
+										"appt",
+										"13"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "no appt with stated ID",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"pID\": 1,\r\n    \"dID\": 1,\r\n    \"apptDateTime\": \"2020-06-12 02:14:51\",\r\n    \"apptStatus\": \"TEST\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5100/appt/13",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5100",
+											"path": [
+												"appt",
+												"13"
+											]
+										}
+									},
+									"status": "NOT FOUND",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "95"
+										},
+										{
+											"key": "Server",
+											"value": "Werkzeug/1.0.1 Python/3.9.4"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 10 Apr 2021 00:48:08 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"code\": 404,\n    \"data\": {\n        \"apptID\": \"13\"\n    },\n    \"message\": \"Appointment not found.\"\n}"
+								}
+							]
 						}
-					}
+					]
 				},
-				"url": {
-					"raw": "http://localhost:5100/appt/",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5100",
-					"path": [
-						"appt",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Appt - update",
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"pID\": 1,\r\n    \"dID\": 1,\r\n    \"apptDateTime\": \"2020-06-12 02:14:51\",\r\n    \"apptStatus\": \"TEST\"\r\n}"
-				},
-				"url": {
-					"raw": "http://localhost:5100/appt/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5100",
-					"path": [
-						"appt",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Doctor - get all",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:5200/doctor",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5200",
-					"path": [
-						"doctor"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Doctor - get one",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:5100/appt/9",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5100",
-					"path": [
-						"appt",
-						"9"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Doctor - get by dpt",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:5100/appt/9",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5100",
-					"path": [
-						"appt",
-						"9"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Prescription - get all",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:5000/appt",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5000",
-					"path": [
-						"appt"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Prescription - get one",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:5000/appt",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5000",
-					"path": [
-						"appt"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Prescription - create",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"pID\": 1,\r\n    \"dID\": 1,\r\n    \"apptDateTime\": \"2020-06-12 02:14:55\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "Doctor",
+					"item": [
+						{
+							"name": "get all doctors",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5200/doctor",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5200",
+									"path": [
+										"doctor"
+									]
+								},
+								"description": "1. successful operation\n1. no doctors"
+							},
+							"response": [
+								{
+									"name": "success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:5200/doctor",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5200",
+											"path": [
+												"doctor"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "2001"
+										},
+										{
+											"key": "Server",
+											"value": "Werkzeug/1.0.1 Python/3.9.4"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 09 Apr 2021 09:24:47 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"code\": 200,\n    \"data\": {\n        \"doctors\": [\n            {\n                \"dDepartment\": \"Cardiologists\",\n                \"dID\": 1,\n                \"dName\": \"Tommy\",\n                \"dRoom\": \"Rm3-1\",\n                \"doct_Availability\": [\n                    {\n                        \"bookingStatus\": \"Available\",\n                        \"dID\": 1,\n                        \"timeSlot\": \"Sat, 12 Jun 2021 02:00:00 GMT\",\n                        \"timeSlotID\": 1\n                    },\n                    {\n                        \"bookingStatus\": \"Available\",\n                        \"dID\": 1,\n                        \"timeSlot\": \"Sun, 13 Jun 2021 02:30:00 GMT\",\n                        \"timeSlotID\": 2\n                    },\n                    {\n                        \"bookingStatus\": \"Available\",\n                        \"dID\": 1,\n                        \"timeSlot\": \"Wed, 14 Jul 2021 03:00:00 GMT\",\n                        \"timeSlotID\": 3\n                    },\n                    {\n                        \"bookingStatus\": \"Available\",\n                        \"dID\": 1,\n                        \"timeSlot\": \"Thu, 15 Jul 2021 03:30:00 GMT\",\n                        \"timeSlotID\": 4\n                    },\n                    {\n                        \"bookingStatus\": \"Available\",\n                        \"dID\": 1,\n                        \"timeSlot\": \"Mon, 16 Aug 2021 04:00:00 GMT\",\n                        \"timeSlotID\": 5\n                    }\n                ]\n            },\n            {\n                \"dDepartment\": \"Cardiologists\",\n                \"dID\": 2,\n                \"dName\": \"Henry\",\n                \"dRoom\": \"Rm3-2\",\n                \"doct_Availability\": [\n                    {\n                        \"bookingStatus\": \"Available\",\n                        \"dID\": 2,\n                        \"timeSlot\": \"Tue, 17 Aug 2021 04:30:00 GMT\",\n                        \"timeSlotID\": 6\n                    },\n                    {\n                        \"bookingStatus\": \"Available\",\n                        \"dID\": 2,\n                        \"timeSlot\": \"Wed, 18 Aug 2021 05:00:00 GMT\",\n                        \"timeSlotID\": 7\n                    },\n                    {\n                        \"bookingStatus\": \"Available\",\n                        \"dID\": 2,\n                        \"timeSlot\": \"Sun, 19 Sep 2021 05:30:00 GMT\",\n                        \"timeSlotID\": 8\n                    },\n                    {\n                        \"bookingStatus\": \"Available\",\n                        \"dID\": 2,\n                        \"timeSlot\": \"Mon, 20 Sep 2021 06:00:00 GMT\",\n                        \"timeSlotID\": 9\n                    }\n                ]\n            }\n        ]\n    }\n}"
+								},
+								{
+									"name": "no doctors",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:5200/doctor",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5200",
+											"path": [
+												"doctor"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "2001"
+										},
+										{
+											"key": "Server",
+											"value": "Werkzeug/1.0.1 Python/3.9.4"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 09 Apr 2021 09:24:47 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"code\": 200,\n    \"data\": {\n        \"doctors\": [\n            {\n                \"dDepartment\": \"Cardiologists\",\n                \"dID\": 1,\n                \"dName\": \"Tommy\",\n                \"dRoom\": \"Rm3-1\",\n                \"doct_Availability\": [\n                    {\n                        \"bookingStatus\": \"Available\",\n                        \"dID\": 1,\n                        \"timeSlot\": \"Sat, 12 Jun 2021 02:00:00 GMT\",\n                        \"timeSlotID\": 1\n                    },\n                    {\n                        \"bookingStatus\": \"Available\",\n                        \"dID\": 1,\n                        \"timeSlot\": \"Sun, 13 Jun 2021 02:30:00 GMT\",\n                        \"timeSlotID\": 2\n                    },\n                    {\n                        \"bookingStatus\": \"Available\",\n                        \"dID\": 1,\n                        \"timeSlot\": \"Wed, 14 Jul 2021 03:00:00 GMT\",\n                        \"timeSlotID\": 3\n                    },\n                    {\n                        \"bookingStatus\": \"Available\",\n                        \"dID\": 1,\n                        \"timeSlot\": \"Thu, 15 Jul 2021 03:30:00 GMT\",\n                        \"timeSlotID\": 4\n                    },\n                    {\n                        \"bookingStatus\": \"Available\",\n                        \"dID\": 1,\n                        \"timeSlot\": \"Mon, 16 Aug 2021 04:00:00 GMT\",\n                        \"timeSlotID\": 5\n                    }\n                ]\n            },\n            {\n                \"dDepartment\": \"Cardiologists\",\n                \"dID\": 2,\n                \"dName\": \"Henry\",\n                \"dRoom\": \"Rm3-2\",\n                \"doct_Availability\": [\n                    {\n                        \"bookingStatus\": \"Available\",\n                        \"dID\": 2,\n                        \"timeSlot\": \"Tue, 17 Aug 2021 04:30:00 GMT\",\n                        \"timeSlotID\": 6\n                    },\n                    {\n                        \"bookingStatus\": \"Available\",\n                        \"dID\": 2,\n                        \"timeSlot\": \"Wed, 18 Aug 2021 05:00:00 GMT\",\n                        \"timeSlotID\": 7\n                    },\n                    {\n                        \"bookingStatus\": \"Available\",\n                        \"dID\": 2,\n                        \"timeSlot\": \"Sun, 19 Sep 2021 05:30:00 GMT\",\n                        \"timeSlotID\": 8\n                    },\n                    {\n                        \"bookingStatus\": \"Available\",\n                        \"dID\": 2,\n                        \"timeSlot\": \"Mon, 20 Sep 2021 06:00:00 GMT\",\n                        \"timeSlotID\": 9\n                    }\n                ]\n            }\n        ]\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "get one doctor",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5200/doctor/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5200",
+									"path": [
+										"doctor",
+										"1"
+									]
+								},
+								"description": "1. successful operation\n1. no doctor with stated ID"
+							},
+							"response": [
+								{
+									"name": "success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:5200/doctor/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5200",
+											"path": [
+												"doctor",
+												"1"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "935"
+										},
+										{
+											"key": "Server",
+											"value": "Werkzeug/1.0.1 Python/3.9.4"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 09 Apr 2021 20:32:22 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"code\": 200,\n    \"data\": {\n        \"dDepartment\": \"Cardiologists\",\n        \"dID\": 1,\n        \"dName\": \"Tommy\",\n        \"dRoom\": \"Rm3-1\",\n        \"doct_Availability\": [\n            {\n                \"bookingStatus\": \"Available\",\n                \"dID\": 1,\n                \"timeSlot\": \"Sat, 12 Jun 2021 02:00:00 GMT\",\n                \"timeSlotID\": 1\n            },\n            {\n                \"bookingStatus\": \"Available\",\n                \"dID\": 1,\n                \"timeSlot\": \"Sun, 13 Jun 2021 02:30:00 GMT\",\n                \"timeSlotID\": 2\n            },\n            {\n                \"bookingStatus\": \"Available\",\n                \"dID\": 1,\n                \"timeSlot\": \"Wed, 14 Jul 2021 03:00:00 GMT\",\n                \"timeSlotID\": 3\n            },\n            {\n                \"bookingStatus\": \"Available\",\n                \"dID\": 1,\n                \"timeSlot\": \"Thu, 15 Jul 2021 03:30:00 GMT\",\n                \"timeSlotID\": 4\n            },\n            {\n                \"bookingStatus\": \"Available\",\n                \"dID\": 1,\n                \"timeSlot\": \"Mon, 16 Aug 2021 04:00:00 GMT\",\n                \"timeSlotID\": 5\n            }\n        ]\n    }\n}"
+								},
+								{
+									"name": "no doctor with stated ID",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:5200/doctor/13",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5200",
+											"path": [
+												"doctor",
+												"13"
+											]
+										}
+									},
+									"status": "NOT FOUND",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "59"
+										},
+										{
+											"key": "Server",
+											"value": "Werkzeug/1.0.1 Python/3.9.4"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 09 Apr 2021 20:33:28 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"code\": 404,\n    \"message\": \"Doctor ID 13 not found.\"\n}"
+								}
+							]
+						},
+						{
+							"name": "get doctor by department",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5200/doctor/dpt/Cardiologists",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5200",
+									"path": [
+										"doctor",
+										"dpt",
+										"Cardiologists"
+									]
+								},
+								"description": "1. successful operation\n1. no doctors under the stated department"
+							},
+							"response": [
+								{
+									"name": "success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:5200/doctor/dpt/Cardiologists",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5200",
+											"path": [
+												"doctor",
+												"dpt",
+												"Cardiologists"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "2001"
+										},
+										{
+											"key": "Server",
+											"value": "Werkzeug/1.0.1 Python/3.9.4"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 09 Apr 2021 20:36:35 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"code\": 200,\n    \"data\": {\n        \"doctors\": [\n            {\n                \"dDepartment\": \"Cardiologists\",\n                \"dID\": 1,\n                \"dName\": \"Tommy\",\n                \"dRoom\": \"Rm3-1\",\n                \"doct_Availability\": [\n                    {\n                        \"bookingStatus\": \"Available\",\n                        \"dID\": 1,\n                        \"timeSlot\": \"Sat, 12 Jun 2021 02:00:00 GMT\",\n                        \"timeSlotID\": 1\n                    },\n                    {\n                        \"bookingStatus\": \"Available\",\n                        \"dID\": 1,\n                        \"timeSlot\": \"Sun, 13 Jun 2021 02:30:00 GMT\",\n                        \"timeSlotID\": 2\n                    },\n                    {\n                        \"bookingStatus\": \"Available\",\n                        \"dID\": 1,\n                        \"timeSlot\": \"Wed, 14 Jul 2021 03:00:00 GMT\",\n                        \"timeSlotID\": 3\n                    },\n                    {\n                        \"bookingStatus\": \"Available\",\n                        \"dID\": 1,\n                        \"timeSlot\": \"Thu, 15 Jul 2021 03:30:00 GMT\",\n                        \"timeSlotID\": 4\n                    },\n                    {\n                        \"bookingStatus\": \"Available\",\n                        \"dID\": 1,\n                        \"timeSlot\": \"Mon, 16 Aug 2021 04:00:00 GMT\",\n                        \"timeSlotID\": 5\n                    }\n                ]\n            },\n            {\n                \"dDepartment\": \"Cardiologists\",\n                \"dID\": 2,\n                \"dName\": \"Henry\",\n                \"dRoom\": \"Rm3-2\",\n                \"doct_Availability\": [\n                    {\n                        \"bookingStatus\": \"Available\",\n                        \"dID\": 2,\n                        \"timeSlot\": \"Tue, 17 Aug 2021 04:30:00 GMT\",\n                        \"timeSlotID\": 6\n                    },\n                    {\n                        \"bookingStatus\": \"Available\",\n                        \"dID\": 2,\n                        \"timeSlot\": \"Wed, 18 Aug 2021 05:00:00 GMT\",\n                        \"timeSlotID\": 7\n                    },\n                    {\n                        \"bookingStatus\": \"Available\",\n                        \"dID\": 2,\n                        \"timeSlot\": \"Sun, 19 Sep 2021 05:30:00 GMT\",\n                        \"timeSlotID\": 8\n                    },\n                    {\n                        \"bookingStatus\": \"Available\",\n                        \"dID\": 2,\n                        \"timeSlot\": \"Mon, 20 Sep 2021 06:00:00 GMT\",\n                        \"timeSlotID\": 9\n                    }\n                ]\n            }\n        ]\n    }\n}"
+								},
+								{
+									"name": "no doctor under stated dpt",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:5200/doctor/dpt/Neurology",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5200",
+											"path": [
+												"doctor",
+												"dpt",
+												"Neurology"
+											]
+										}
+									},
+									"status": "NOT FOUND",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "57"
+										},
+										{
+											"key": "Server",
+											"value": "Werkzeug/1.0.1 Python/3.9.4"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 09 Apr 2021 20:38:13 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"code\": 404,\n    \"message\": \"There are no doctors.\"\n}"
+								}
+							]
+						},
+						{
+							"name": "get doctor by timeslot",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5200/doctor/removets/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5200",
+									"path": [
+										"doctor",
+										"removets",
+										"1"
+									]
+								},
+								"description": "1. successful operation\n1. no doctors under stated timeslot"
+							},
+							"response": [
+								{
+									"name": "success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:5200/doctor/removets/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5200",
+											"path": [
+												"doctor",
+												"removets",
+												"1"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "156"
+										},
+										{
+											"key": "Server",
+											"value": "Werkzeug/1.0.1 Python/3.9.4"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 09 Apr 2021 20:41:18 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"code\": 200,\n    \"data\": {\n        \"bookingStatus\": \"Available\",\n        \"dID\": 1,\n        \"timeSlot\": \"Sat, 12 Jun 2021 02:00:00 GMT\",\n        \"timeSlotID\": 1\n    }\n}"
+								},
+								{
+									"name": "no doctor under stated timeslot",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:5200/doctor/removets/13",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5200",
+											"path": [
+												"doctor",
+												"removets",
+												"13"
+											]
+										}
+									},
+									"status": "NOT FOUND",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "61"
+										},
+										{
+											"key": "Server",
+											"value": "Werkzeug/1.0.1 Python/3.9.4"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 09 Apr 2021 21:23:45 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"code\": 404,\n    \"message\": \"Timeslot ID 13 not found.\"\n}"
+								}
+							]
+						},
+						{
+							"name": "update booking status (success)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \"bookingStatus\": \"Unavailable\",\r\n        \"timeSlotID\": 4\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5200/doctor/statuschange/4",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5200",
+									"path": [
+										"doctor",
+										"statuschange",
+										"4"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "correct inputs",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n        \"bookingStatus\": \"Unavailable\",\r\n        \"timeSlotID\": 4\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5200/doctor/statuschange/4",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5200",
+											"path": [
+												"doctor",
+												"statuschange",
+												"4"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "158"
+										},
+										{
+											"key": "Server",
+											"value": "Werkzeug/1.0.1 Python/3.9.4"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 09 Apr 2021 21:05:17 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"code\": 200,\n    \"data\": {\n        \"bookingStatus\": \"Unavailable\",\n        \"dID\": 1,\n        \"timeSlot\": \"Thu, 15 Jul 2021 03:30:00 GMT\",\n        \"timeSlotID\": 4\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "update booking status (failure)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \"bookingStatus\": \"Unavailable\",\r\n        \"timeSlotID\": 4\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5200/doctor/statuschange/13",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5200",
+									"path": [
+										"doctor",
+										"statuschange",
+										"13"
+									]
+								},
+								"description": "1. wrong/insufficient inputs\n   * where booking status is not included\n1. time slot not found"
+							},
+							"response": [
+								{
+									"name": "wrong inputs",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n        \"timeSlotID\": 4\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5200/doctor/statuschange/4",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5200",
+											"path": [
+												"doctor",
+												"statuschange",
+												"4"
+											]
+										}
+									},
+									"status": "INTERNAL SERVER ERROR",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "139"
+										},
+										{
+											"key": "Server",
+											"value": "Werkzeug/1.0.1 Python/3.9.4"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 09 Apr 2021 21:06:44 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"code\": 500,\n    \"data\": {\n        \"timeSlotID\": 4\n    },\n    \"message\": \"An error occurred while updating the appointment. 'bookingStatus'\"\n}"
+								},
+								{
+									"name": "timeslotID not found",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n        \"bookingStatus\": \"Unavailable\",\r\n        \"timeSlotID\": 4\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5200/doctor/statuschange/13",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5200",
+											"path": [
+												"doctor",
+												"statuschange",
+												"13"
+											]
+										}
+									},
+									"status": "NOT FOUND",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "96"
+										},
+										{
+											"key": "Server",
+											"value": "Werkzeug/1.0.1 Python/3.9.4"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 09 Apr 2021 21:10:31 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"code\": 404,\n    \"data\": {\n        \"timeSlotID\": 13\n    },\n    \"message\": \"timeSlotID not found.\"\n}"
+								}
+							]
 						}
-					}
+					]
 				},
-				"url": {
-					"raw": "http://localhost:5100/appt/",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5100",
-					"path": [
-						"appt",
-						""
+				{
+					"name": "Patient",
+					"item": [
+						{
+							"name": "get all patients",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5500/patient",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5500",
+									"path": [
+										"patient"
+									]
+								},
+								"description": "1. successful operation\n1. no patients"
+							},
+							"response": [
+								{
+									"name": "success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:5500/patient",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5500",
+											"path": [
+												"patient"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "1039"
+										},
+										{
+											"key": "Server",
+											"value": "Werkzeug/1.0.1 Python/3.9.4"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 09 Apr 2021 07:14:46 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"code\": 200,\n    \"data\": {\n        \"patients\": [\n            {\n                \"dob\": \"\",\n                \"email\": \"brlewtest@brlewtest.com\",\n                \"id\": 1,\n                \"medical_record\": [],\n                \"mobileno\": 0,\n                \"name\": \"\",\n                \"partialnric\": \"0\",\n                \"race\": \"\"\n            },\n            {\n                \"dob\": \"\",\n                \"email\": \"seekhealthadmin@f.com\",\n                \"id\": 2,\n                \"medical_record\": [],\n                \"mobileno\": 0,\n                \"name\": \"\",\n                \"partialnric\": \"0\",\n                \"race\": \"\"\n            },\n            {\n                \"dob\": \"10 Sep 1948\",\n                \"email\": \"bwong375@gmail.com\",\n                \"id\": 3,\n                \"medical_record\": [],\n                \"mobileno\": 97399245,\n                \"name\": \"BERNARD WONG\",\n                \"partialnric\": \"*****375C\",\n                \"race\": \"CHINESE\"\n            },\n            {\n                \"dob\": \"6 Jun 1998\",\n                \"email\": \"tanxiaohui98@gmail.com\",\n                \"id\": 4,\n                \"medical_record\": [],\n                \"mobileno\": 97399245,\n                \"name\": \"TAN XIAO HUI\",\n                \"partialnric\": \"*****381D\",\n                \"race\": \"CHINESE\"\n            }\n        ]\n    }\n}"
+								},
+								{
+									"name": "no patient found",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:5500/patient",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5500",
+											"path": [
+												"patient"
+											]
+										}
+									},
+									"status": "NOT FOUND",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "58"
+										},
+										{
+											"key": "Server",
+											"value": "Werkzeug/1.0.1 Python/3.9.4"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 09 Apr 2021 22:39:59 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"code\": 404,\n    \"message\": \"There are no patients.\"\n}"
+								}
+							]
+						},
+						{
+							"name": "get one patient",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5500/patient",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5500",
+									"path": [
+										"patient"
+									]
+								},
+								"description": "1. successful operation\n1. no patient with stated ID"
+							},
+							"response": [
+								{
+									"name": "success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:5500/patient/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5500",
+											"path": [
+												"patient",
+												"1"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "211"
+										},
+										{
+											"key": "Server",
+											"value": "Werkzeug/1.0.1 Python/3.9.4"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 09 Apr 2021 07:15:18 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"code\": 200,\n    \"data\": {\n        \"dob\": \"\",\n        \"email\": \"brlewtest@brlewtest.com\",\n        \"id\": 1,\n        \"medical_record\": [],\n        \"mobileno\": 0,\n        \"name\": \"\",\n        \"partialnric\": \"0\",\n        \"race\": \"\"\n    }\n}"
+								},
+								{
+									"name": "patient not found",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:5500/patient/13",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5500",
+											"path": [
+												"patient",
+												"13"
+											]
+										}
+									},
+									"status": "NOT FOUND",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "54"
+										},
+										{
+											"key": "Server",
+											"value": "Werkzeug/1.0.1 Python/3.9.4"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 09 Apr 2021 22:19:36 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"code\": 404,\n    \"message\": \"Patient not found.\"\n}"
+								}
+							]
+						},
+						{
+							"name": "create patient medical record (success)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"pDiagnosis\": \"dry cough, shortness of breath, fever\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5500/patient/1/medicalRecords",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5500",
+									"path": [
+										"patient",
+										"1",
+										"medicalRecords"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "correct inputs",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"pDiagnosis\": \"dry cough, shortness of breath, fever\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5500/patient/1/medicalRecords",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5500",
+											"path": [
+												"patient",
+												"1",
+												"medicalRecords"
+											]
+										}
+									},
+									"status": "CREATED",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "71"
+										},
+										{
+											"key": "Server",
+											"value": "Werkzeug/1.0.1 Python/3.9.4"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 09 Apr 2021 22:28:52 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"code\": 201,\n    \"message\": \"Medical records successfully added!\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Prescription",
+					"item": [
+						{
+							"name": "get all prescriptions",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5300/prescription",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5300",
+									"path": [
+										"prescription"
+									]
+								},
+								"description": "1. successful operation\n1. no prescriptions"
+							},
+							"response": [
+								{
+									"name": "success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:5300/prescription",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5300",
+											"path": [
+												"prescription"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "210"
+										},
+										{
+											"key": "Server",
+											"value": "Werkzeug/1.0.1 Python/3.9.4"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 09 Apr 2021 22:54:51 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"code\": 200,\n    \"data\": {\n        \"prescriptions\": [\n            {\n                \"aID\": 1,\n                \"dosage\": \"500mg\",\n                \"medName\": \"amoxicillin\",\n                \"pID\": 1,\n                \"prescriptionID\": 5\n            }\n        ]\n    }\n}"
+								},
+								{
+									"name": "no prescriptions",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:5300/prescription",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5300",
+											"path": [
+												"prescription"
+											]
+										}
+									},
+									"status": "UNKNOWN",
+									"code": 40,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "59"
+										},
+										{
+											"key": "Server",
+											"value": "Werkzeug/1.0.1 Python/3.9.4"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 09 Apr 2021 23:30:29 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"code\": 404,\n    \"message\": \"prescription not found.\"\n}"
+								}
+							]
+						},
+						{
+							"name": "get one prescription",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5300/prescription/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5300",
+									"path": [
+										"prescription",
+										"1"
+									]
+								},
+								"description": "1. successful operation\n1. no prescription with stated ID"
+							},
+							"response": [
+								{
+									"name": "success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:5300/prescription/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5300",
+											"path": [
+												"prescription",
+												"1"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "167"
+										},
+										{
+											"key": "Server",
+											"value": "Werkzeug/1.0.1 Python/3.9.4"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 09 Apr 2021 23:18:07 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"code\": 200,\n    \"data\": [\n        {\n            \"aID\": 1,\n            \"dosage\": \"500mg\",\n            \"medName\": \"amoxicillin\",\n            \"pID\": 1,\n            \"prescriptionID\": 5\n        }\n    ]\n}"
+								},
+								{
+									"name": "no prescription with stated ID",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:5300/prescription/13",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5300",
+											"path": [
+												"prescription",
+												"13"
+											]
+										}
+									},
+									"status": "NOT FOUND",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "59"
+										},
+										{
+											"key": "Server",
+											"value": "Werkzeug/1.0.1 Python/3.9.4"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 09 Apr 2021 23:18:38 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"code\": 404,\n    \"message\": \"Prescription not found.\"\n}"
+								}
+							]
+						},
+						{
+							"name": "create a prescription (success)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"medName\": \"ibuprofen\",\r\n    \"dosage\": \"200mg\",\r\n    \"pID\": 1,\r\n    \"aID\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5300/prescription",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5300",
+									"path": [
+										"prescription"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "correct inputs",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"medName\": \"ibuprofen\",\r\n    \"dosage\": \"200mg\",\r\n    \"pID\": 1,\r\n    \"aID\": 1\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5300/prescription",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5300",
+											"path": [
+												"prescription"
+											]
+										}
+									},
+									"status": "CREATED",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "143"
+										},
+										{
+											"key": "Server",
+											"value": "Werkzeug/1.0.1 Python/3.9.4"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 09 Apr 2021 23:25:35 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"code\": 201,\n    \"data\": {\n        \"aID\": 1,\n        \"dosage\": \"200mg\",\n        \"medName\": \"ibuprofen\",\n        \"pID\": 1,\n        \"prescriptionID\": 6\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "create a prescription (failure)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"medName\": \"ibuprofen\",\r\n    \"dosage\": \"200mg\",\r\n    \"pID\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5300/prescription",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5300",
+									"path": [
+										"prescription"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "insufficient inputs",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"medName\": \"ibuprofen\",\r\n    \"dosage\": \"200mg\",\r\n    \"pID\": 1\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5300/prescription",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5300",
+											"path": [
+												"prescription"
+											]
+										}
+									},
+									"status": "INTERNAL SERVER ERROR",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "423"
+										},
+										{
+											"key": "Server",
+											"value": "Werkzeug/1.0.1 Python/3.9.4"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 09 Apr 2021 23:26:43 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"code\": 500,\n    \"message\": \"An error occurred creating the prescription. (mysql.connector.errors.IntegrityError) 1048 (23000): Column 'aID' cannot be null\\n[SQL: INSERT INTO prescription (`medName`, dosage, `pID`, `aID`) VALUES (%(medName)s, %(dosage)s, %(pID)s, %(aID)s)]\\n[parameters: {'medName': 'ibuprofen', 'dosage': '200mg', 'pID': 1, 'aID': None}]\\n(Background on this error at: http://sqlalche.me/e/13/gkpj)\"\n}"
+								}
+							]
+						}
 					]
 				}
-			},
-			"response": []
+			],
+			"description": "The SMS are as follows:\n* Appointment\n* Doctor \n* Patient\n* Prescription\n* Employee\n\nThe Employee SMS and Patient SMS utilises `Flask-Login` for user session management. `Flask-Login` handles common tasks such as logging in, logging out, and remembering your users' sessions over extended periods of time. Please refer to <a href=\"https://flask-login.readthedocs.io/en/latest/\">Flask documentation</a> for reference."
 		},
 		{
-			"name": "Booking Appt - correct inputs",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://localhost:5400/bookingappt",
-					"protocol": "http",
-					"host": [
-						"localhost"
+			"name": "CMS",
+			"item": [
+				{
+					"name": "Consultation Information",
+					"item": [
+						{
+							"name": "get doctor's scheduled appointments",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5600/consultDetails/doctor/appt/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5600",
+									"path": [
+										"consultDetails",
+										"doctor",
+										"appt",
+										"1"
+									]
+								},
+								"description": "1. successful operations\n1. no appointment for doctor"
+							},
+							"response": [
+								{
+									"name": "success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:5600/consultDetails/doctor/appt/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5600",
+											"path": [
+												"consultDetails",
+												"doctor",
+												"appt",
+												"1"
+											]
+										}
+									},
+									"status": "CREATED",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "811"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Server",
+											"value": "Werkzeug/1.0.1 Python/3.9.4"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 09 Apr 2021 23:33:03 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"code\": 201,\n    \"data\": {\n        \"doctorAppt_result\": {\n            \"code\": 200,\n            \"data\": [\n                {\n                    \"apptDateTime\": \"Fri, 12 Jun 2020 02:14:51 GMT\",\n                    \"apptID\": 3,\n                    \"apptStatus\": \"TEST\",\n                    \"created\": \"Fri, 12 Jun 2020 03:14:56 GMT\",\n                    \"dID\": 1,\n                    \"modified\": \"Fri, 09 Apr 2021 21:19:10 GMT\",\n                    \"pID\": 1,\n                    \"timeSlotID\": 3\n                },\n                {\n                    \"apptDateTime\": \"Sat, 21 Aug 2021 12:00:00 GMT\",\n                    \"apptID\": 8,\n                    \"apptStatus\": \"pending\",\n                    \"created\": \"Fri, 09 Apr 2021 21:16:01 GMT\",\n                    \"dID\": 1,\n                    \"modified\": \"Fri, 09 Apr 2021 21:16:01 GMT\",\n                    \"pID\": 1,\n                    \"timeSlotID\": 7\n                }\n            ]\n        }\n    },\n    \"message\": \"Successfully retrieved doctor's appointment\"\n}"
+								},
+								{
+									"name": "no appt for doctor",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:5600/consultDetails/doctor/appt/13",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5600",
+											"path": [
+												"consultDetails",
+												"doctor",
+												"appt",
+												"13"
+											]
+										}
+									},
+									"status": "BAD REQUEST",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "62"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Server",
+											"value": "Werkzeug/1.0.1 Python/3.9.4"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 09 Apr 2021 23:33:26 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"code\": 400,\n    \"message\": \"Doctor got no Appointment.\"\n}"
+								}
+							]
+						},
+						{
+							"name": "get patient's details",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5600/consultDetails/3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5600",
+									"path": [
+										"consultDetails",
+										"3"
+									]
+								},
+								"description": "1. successful operation\n1. no medical records for patient"
+							},
+							"response": [
+								{
+									"name": "success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:5600/consultDetails/3",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5600",
+											"path": [
+												"consultDetails",
+												"3"
+											]
+										}
+									},
+									"status": "CREATED",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "429"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Server",
+											"value": "Werkzeug/1.0.1 Python/3.9.4"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 09 Apr 2021 07:17:15 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"code\": 201,\n    \"data\": {\n        \"patientMedRec_result\": {\n            \"code\": 200,\n            \"data\": {\n                \"dob\": \"10 Sep 1948\",\n                \"email\": \"bwong375@gmail.com\",\n                \"id\": 3,\n                \"medical_record\": [],\n                \"mobileno\": 97399245,\n                \"name\": \"BERNARD WONG\",\n                \"partialnric\": \"*****375C\",\n                \"race\": \"CHINESE\"\n            }\n        }\n    },\n    \"message\": \"Successfully retrieved patient's medical records\"\n}"
+								},
+								{
+									"name": "no medical record for patient",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:5600/consultDetails/5",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5600",
+											"path": [
+												"consultDetails",
+												"5"
+											]
+										}
+									},
+									"status": "BAD REQUEST",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "67"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Server",
+											"value": "Werkzeug/1.0.1 Python/3.9.4"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 09 Apr 2021 23:35:01 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"code\": 400,\n    \"message\": \"Patient got no medical Records.\"\n}"
+								}
+							]
+						},
+						{
+							"name": "get patient's prescriptions by patient's ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5600/consultDetails/prescription/3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5600",
+									"path": [
+										"consultDetails",
+										"prescription",
+										"3"
+									]
+								},
+								"description": "1. successful operation\n1. no prescriptions for patient"
+							},
+							"response": [
+								{
+									"name": "success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:5600/consultDetails/prescription/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5600",
+											"path": [
+												"consultDetails",
+												"prescription",
+												"1"
+											]
+										}
+									},
+									"status": "CREATED",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "503"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Server",
+											"value": "Werkzeug/1.0.1 Python/3.9.4"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 09 Apr 2021 23:36:51 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"code\": 201,\n    \"data\": {\n        \"patientPrescription_result\": {\n            \"code\": 200,\n            \"data\": [\n                {\n                    \"aID\": 1,\n                    \"dosage\": \"200mg\",\n                    \"medName\": \"amoxicillin\",\n                    \"pID\": 1,\n                    \"prescriptionID\": 1\n                },\n                {\n                    \"aID\": 1,\n                    \"dosage\": \"200mg\",\n                    \"medName\": \"ibuprofen\",\n                    \"pID\": 1,\n                    \"prescriptionID\": 7\n                }\n            ]\n        }\n    },\n    \"message\": \"Successfully retrieved patient's prescription\"\n}"
+								},
+								{
+									"name": "no prescriptions for patient",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:5600/consultDetails/prescription/5",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5600",
+											"path": [
+												"consultDetails",
+												"prescription",
+												"5"
+											]
+										}
+									},
+									"status": "BAD REQUEST",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "64"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Server",
+											"value": "Werkzeug/1.0.1 Python/3.9.4"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 09 Apr 2021 23:37:20 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"code\": 400,\n    \"message\": \"Patient got no prescription.\"\n}"
+								}
+							]
+						},
+						{
+							"name": "create patient's medical record (success)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"MedicalRecords\": {\r\n        \"pDiagnosis\": \"Covid 19\"\r\n    },\r\n    \"Prescription\": {\r\n        \"medName\": \"amoxicillin\",\r\n        \"medDescription\": \"Antibiotic used to treat a number of bacterial infections\",\r\n        \"dosage\": \"500mg\",\r\n        \"medCode\": \"ABCDE\",\r\n        \"pID\": 1,\r\n        \"aID\": 1\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5600/consultDetails/3/medicalRecords",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5600",
+									"path": [
+										"consultDetails",
+										"3",
+										"medicalRecords"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "correct inputs",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"MedicalRecords\": {\r\n        \"pDiagnosis\": \"Covid 19\"\r\n    },\r\n    \"Prescription\": {\r\n        \"medName\": \"amoxicillin\",\r\n        \"medDescription\": \"Antibiotic used to treat a number of bacterial infections\",\r\n        \"dosage\": \"500mg\",\r\n        \"medCode\": \"ABCDE\",\r\n        \"pID\": 1,\r\n        \"aID\": 1\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:5600/consultDetails/3/medicalRecords",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5600",
+											"path": [
+												"consultDetails",
+												"3",
+												"medicalRecords"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "408"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Server",
+											"value": "Werkzeug/1.0.1 Python/3.9.4"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 09 Apr 2021 07:17:34 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"code\": 201,\n    \"data\": {\n        \"medRec_result\": {\n            \"code\": 201,\n            \"message\": \"Medical records successfully added!\"\n        },\n        \"prescription_result\": {\n            \"code\": 201,\n            \"data\": {\n                \"aID\": 1,\n                \"dosage\": \"500mg\",\n                \"medName\": \"amoxicillin\",\n                \"pID\": 1,\n                \"prescriptionID\": 5\n            }\n        }\n    },\n    \"message\": \"Consult details added successfully!!!!!!\"\n}"
+								}
+							]
+						}
 					],
-					"port": "5400",
-					"path": [
-						"bookingappt"
-					]
+					"description": "* doctor view all scheduled appointments\n* doctor view patient's details\n* doctor create consultation information\n* pharmacist view all prescriptions"
+				},
+				{
+					"name": "Booking Appointment",
+					"item": [
+						{
+							"name": "get all doctors' name and availability",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5400/bookingappt",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5400",
+									"path": [
+										"bookingappt"
+									]
+								},
+								"description": "1. successful operation\n1. no doctor with stated ID"
+							},
+							"response": [
+								{
+									"name": "success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:5400/bookingappt",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5400",
+											"path": [
+												"bookingappt"
+											]
+										}
+									},
+									"status": "CREATED",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "589"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Server",
+											"value": "Werkzeug/1.0.1 Python/3.9.4"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 09 Apr 2021 23:41:08 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"code\": 201,\n    \"data\": {\n        \"doctoravail_result\": {\n            \"code\": 200,\n            \"data\": {\n                \"doctors\": [\n                    {\n                        \"dDepartment\": \"Cardiologists\",\n                        \"dID\": 1,\n                        \"dName\": \"Tommy\",\n                        \"dRoom\": \"Rm3-1\",\n                        \"doct_Availability\": []\n                    },\n                    {\n                        \"dDepartment\": \"Cardiologists\",\n                        \"dID\": 2,\n                        \"dName\": \"Henry\",\n                        \"dRoom\": \"Rm3-2\",\n                        \"doct_Availability\": []\n                    }\n                ]\n            }\n        }\n    },\n    \"message\": \"Successfully retrieved doctor's availability\"\n}"
+								},
+								{
+									"name": "no doctors",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:5400/bookingappt",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5400",
+											"path": [
+												"bookingappt"
+											]
+										}
+									},
+									"status": "BAD REQUEST",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "100"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Server",
+											"value": "Werkzeug/1.0.1 Python/3.9.4"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 09 Apr 2021 23:40:09 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"code\": 400,\n    \"message\": \"Doctor is not available at this time slot findDoctorAvailability\"\n}"
+								}
+							]
+						},
+						{
+							"name": "get doctors by department",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5400/bookingappt/dpt/cardiologists",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5400",
+									"path": [
+										"bookingappt",
+										"dpt",
+										"cardiologists"
+									]
+								},
+								"description": "1. successful operations\n2. no doctors in stated department"
+							},
+							"response": [
+								{
+									"name": "success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:5400/bookingappt/dpt/cardiologists",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5400",
+											"path": [
+												"bookingappt",
+												"dpt",
+												"cardiologists"
+											]
+										}
+									},
+									"status": "CREATED",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "589"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Server",
+											"value": "Werkzeug/1.0.1 Python/3.9.4"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 09 Apr 2021 23:41:22 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"code\": 201,\n    \"data\": {\n        \"doctoravail_result\": {\n            \"code\": 200,\n            \"data\": {\n                \"doctors\": [\n                    {\n                        \"dDepartment\": \"Cardiologists\",\n                        \"dID\": 1,\n                        \"dName\": \"Tommy\",\n                        \"dRoom\": \"Rm3-1\",\n                        \"doct_Availability\": []\n                    },\n                    {\n                        \"dDepartment\": \"Cardiologists\",\n                        \"dID\": 2,\n                        \"dName\": \"Henry\",\n                        \"dRoom\": \"Rm3-2\",\n                        \"doct_Availability\": []\n                    }\n                ]\n            }\n        }\n    },\n    \"message\": \"Successfully retrieved doctor's availability\"\n}"
+								},
+								{
+									"name": "dpt not found",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:5400/bookingappt/dpt/neurology",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5400",
+											"path": [
+												"bookingappt",
+												"dpt",
+												"neurology"
+											]
+										}
+									},
+									"status": "BAD REQUEST",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "77"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Server",
+											"value": "Werkzeug/1.0.1 Python/3.9.4"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 09 Apr 2021 23:41:59 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"code\": 400,\n    \"message\": \"Doctor is not available at this time slot\"\n}"
+								}
+							]
+						},
+						{
+							"name": "update doctor's availability status for stated timeslot",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:5400/bookingappt/statuschange/4/5/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5400",
+									"path": [
+										"bookingappt",
+										"statuschange",
+										"4",
+										"5",
+										"1"
+									]
+								},
+								"description": "1. successful operation\n   * update stated availability status from \"Available\" To \"Unavailable\"\n   * adds timeSlotID into patient's account"
+							},
+							"response": [
+								{
+									"name": "success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "http://localhost:5400/bookingappt/statuschange/4/5/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "5400",
+											"path": [
+												"bookingappt",
+												"statuschange",
+												"4",
+												"5",
+												"1"
+											]
+										}
+									},
+									"status": "CREATED",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "321"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Server",
+											"value": "Werkzeug/1.0.1 Python/3.9.4"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 10 Apr 2021 17:21:51 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"code\": 201,\n    \"data\": {\n        \"doctoravail_result\": {\n            \"code\": 200,\n            \"data\": {\n                \"bookingStatus\": \"Unavailable\",\n                \"dID\": 1,\n                \"timeSlot\": \"Mon, 16 Aug 2021 04:00:00 GMT\",\n                \"timeSlotID\": 5\n            }\n        }\n    },\n    \"message\": \"Successfully altered Doctor's Timeslot availability\"\n}"
+								}
+							]
+						}
+					],
+					"description": "* patient view available time slots\n* patient book an appointment\n* patient view all scheduled appointments"
 				}
-			},
-			"response": []
+			]
 		}
 	]
 }
