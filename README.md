@@ -17,7 +17,7 @@ For Windows :
 3.  Import the sql statements in the following order.
     - g1t6_patient
     - g1t6_doctor
-    - g1t6_appt
+    - g1t6_appt (don't show the appts)
     - g1t6_prescription
     - g1t6_employee
 
