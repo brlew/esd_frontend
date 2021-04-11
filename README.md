@@ -7,7 +7,7 @@ SeekHealth is our effort to allow healthcare providers to aggregate thousands of
 
 ## 1. Prerequisites
 ### 1.1 Installation
-Please ensure that you have the following installed on your machine. You can follow [this installation guide] (https://docs.google.com/document/d/1hSqhVbgbclf-eOvBx5BQhaTJHxbUSUN4wZTrLNUMyUk/edit#heading=h.3l1qt71ezfd0).
+Please ensure that you have the following installed on your machine. You can follow [this installation guide](https://docs.google.com/document/d/1hSqhVbgbclf-eOvBx5BQhaTJHxbUSUN4wZTrLNUMyUk/edit#heading=h.3l1qt71ezfd0).
     * Python 3
     * Visual Studio Code
     * Docker Desktop
@@ -21,11 +21,11 @@ Please ensure that the default port of MYSQL is 3306. Change the port number by 
 For Windows :
 1.  Start WAMP server.
 
-2.  Go to [phpMyAdmin] (http://localhost/phpmyadmin/index.php) and log in.
+2.  Go to [phpMyAdmin](http://localhost/phpmyadmin/index.php) and log in.
     Username: root
     Password: 
 
-3.  Import the sql statements in the following order. [under the database folder](./database)
+3.  Import the sql statements in the following order. [under the database folder](./tree/main/database)
     - g1t6_patient
     - g1t6_doctor
     - g1t6_appt (if values are not added, please copy the SQL statements from database/appt.sql folders)
