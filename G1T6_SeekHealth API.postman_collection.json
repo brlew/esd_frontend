@@ -963,7 +963,7 @@
 							]
 						},
 						{
-							"name": "update booking status (success)",
+							"name": "update appointment booking status (success)",
 							"request": {
 								"method": "PUT",
 								"header": [],
@@ -1046,7 +1046,7 @@
 							]
 						},
 						{
-							"name": "update booking status (failure)",
+							"name": "update appointment booking status (failure)",
 							"request": {
 								"method": "PUT",
 								"header": [],
