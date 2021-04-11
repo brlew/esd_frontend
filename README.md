@@ -69,17 +69,12 @@ Open Postman App and import `ESD_G9T2.postman_collection.json`. Run the requests
 
 ## 4. Docker
 
-5. Build the docker images/
+5. Build the docker images.
 
 	```
-
 	cd esd_frontend
-
 	docker-compose up -d
-
 	```
-
-  
 
 6. Please check that all the images and containers are running using `docker images` and `docker ps` in your command prompt. Using `docker images`, you should see the following images with tag `g1t6`. 
 
@@ -103,14 +98,17 @@ Open Postman App and import `ESD_G9T2.postman_collection.json`. Run the requests
 	* rabbitmq:3-management
   
 
+
 ## 5. User Scenarios
 We have a total of 8 scenarios across 3 user interfaces (UI). You can refer to the walkthrough under "recorded scenarios" folder.
 
 ### 5.1 Patient UI
 #### 5.1.1 Sign In / Sign Up
-Create a SeekHealth account through http://localhost:5800/signup. SingPass Verification will be done through http://localhost:3003.
+Create a SeekHealth account through http://localhost:5800/signup. SingPass Verification will be done through http://localhost:3003. 
 
-If you are already a SeekHealth user, sign in through http://localhost:5800/login. Use `tanxiaohui98` as both the username and password.
+If you are already a SeekHealth user, sign in through http://localhost:5800/login. 
+* Username: tanxiaohui98
+* Password: tanxiaohui98
 
 #### 5.1.2 Create an appointment 
 Click on `MAKE AN APPOINTMENT` button.
@@ -129,10 +127,15 @@ Click on the `Log Out` tab under the navigation bar so that the session can end.
 
 ### 5.2 Doctor UI
 #### 5.2.1 Sign In 
-Sign In through http://localhost:5900/login using `tommy123` as both the username and password. Please select `doctor` as the role. 
+Sign In through http://localhost:5900/login.
+* Username: tommy123
+* Password: tommy123
+
+Please select `doctor` as the role. 
 
 #### 5.2.2 View all scheduled appointments and patient's details
-Once signed in, all scheduled appointments can be seen. Before the medical consultation, you can view the patient's details by clicking on `View Patient Details` button. 
+Once signed in, all scheduled appointments can be seen. 
+Before the medical consultation, you can view the patient's details by clicking on `View Patient Details` button. 
 
 #### 5.2.3 Create consultation information
 During the medical consultation, a new consultation detail can be added via the `Add Consultation Details` button. The patient is diagnosed with the following symptoms.
@@ -147,7 +150,11 @@ End the session via http://localhost:5900/logout.
 	
 ### 5.3 Pharmacist
 #### 5.3.1 Sign In 
-Sign In through http://localhost:5900/login using `liying123` as both the username and password. Please select `pharmacist` as the role. 
+Sign in through http://localhost:5900/login.
+* Username: liying123
+* Password: liying123
+
+ Please select `pharmacist` as the role. 
 
 #### 5.3.2 View all medical prescriptions
 When preparing the medication, you can search for the prescription via patient ID. 
