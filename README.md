@@ -1,23 +1,34 @@
-# esd_frontend
+# SeekHealth 
+SeekHealth is our effort to allow healthcare providers to aggregate thousands of appointments and consultation information. The SeekHealth API allows healthcare providers to bring features for both their internal and external users.
 
-## Setup instructions
-###
-- have WAMP running
-- have Docker running
+## 0. Direct Links to Resources
+    * [ ] ( ).
 
 
-### Database
+## 1. Prerequisites
+### 1.1 Installation
+Please ensure that you have the following installed on your machine. You can follow [this installation guide] (https://docs.google.com/document/d/1hSqhVbgbclf-eOvBx5BQhaTJHxbUSUN4wZTrLNUMyUk/edit#heading=h.3l1qt71ezfd0).
+    * Python 3
+    * Visual Studio Code
+    * Docker Desktop
+    * WAMP Server
+
+### 1.2 Launch
+Make sure that your WAMP Server and Docker is running.
+Please ensure that the default port of MYSQL is 3306. Change the port number by Right Click WAMP Icon -> Tools-> under port use by MySQL-> use a port Other than XXXX. WAMP will be restarted.
+
+## 2. Database
 For Windows :
 1.  Start WAMP server.
 
-2.  Go to phpMyAdmin (http://localhost/phpmyadmin/index.php) and log in.
+2.  Go to [phpMyAdmin] (http://localhost/phpmyadmin/index.php) and log in.
     Username: root
     Password: 
 
-3.  Import the sql statements in the following order.
+3.  Import the sql statements in the following order. [under the database folder](./database)
     - g1t6_patient
     - g1t6_doctor
-    - g1t6_appt (don't show the appts)
+    - g1t6_appt (if values are not added, please copy the SQL statements from database/appt.sql folders)
     - g1t6_prescription
     - g1t6_employee
 
