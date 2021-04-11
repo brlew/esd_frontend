@@ -25,7 +25,7 @@ For Windows :
     Username: root
     Password: 
 
-3.  Import the sql statements in the following order. [under the database folder](../database)
+3.  Import the sql statements in the following order. [under the database folder](../../database)
     - g1t6_patient
     - g1t6_doctor
     - g1t6_appt (if values are not added, please copy the SQL statements from database/appt.sql folders)
