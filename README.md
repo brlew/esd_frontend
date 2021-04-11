@@ -2,16 +2,16 @@
 SeekHealth is our effort to allow healthcare providers to aggregate thousands of appointments and consultation information. The SeekHealth API allows healthcare providers to bring features for both their internal and external users.
 
 ## 0. Direct Links to Resources
-    - [ ] ( ).
+    * [ ] ( ).
 
 
 ## 1. Prerequisites
 ### 1.1 Installation
 Please ensure that you have the following installed on your machine. You can follow [this installation guide] (https://docs.google.com/document/d/1hSqhVbgbclf-eOvBx5BQhaTJHxbUSUN4wZTrLNUMyUk/edit#heading=h.3l1qt71ezfd0).
-    - Python 3
-    - Visual Studio Code
-    - Docker Desktop
-    - WAMP Server
+    * Python 3
+    * Visual Studio Code
+    * Docker Desktop
+    * WAMP Server
 
 ### 1.2 Launch
 Make sure that your WAMP Server and Docker is running.
