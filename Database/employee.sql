@@ -51,5 +51,5 @@ CREATE TABLE IF NOT EXISTS `pharmacistLogin` (
 
 -- Dumping data for table `empLogin`
 INSERT INTO `pharmacistLogin` (`id`, `pharName`, `pharUsername`, `pharPwd`) VALUES
-(21, 'Li Ying', 'liying', 'liying123'),
+(21, 'Li Ying', 'liying123', 'liying123'),
 (22, 'Bo Ren', 'boren', 'boren123');
