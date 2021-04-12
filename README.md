@@ -81,7 +81,7 @@ Open Postman App and import `ESD_G9T2.postman_collection.json`. Run the requests
 	* borenlew/login_log:g1t6_v2
 	* borenlew/patientlogin:g1t6_v2
 	* borenlew/employeelogin:g1t6_v2
-    	* borenlew/singpass:g1t6_v2
+    * borenlew/singpass:g1t6_v2
 
 	**Complex Microservices**
 	* jthm/consultationinfo:g1t6
