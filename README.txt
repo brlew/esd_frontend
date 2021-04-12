@@ -7,6 +7,7 @@ SeekHealth is our effort to allow healthcare providers to aggregate thousands of
 2. SG Verify Demo App: https://github.com/ndi-trusted-data/sg-verify-demo-app
 3. SingPass Verify API: https://api.singpass.gov.sg/library/verify/developers/overview
 4. Flask Login Documentation: https://flask-login.readthedocs.io/en/latest/ 
+5. WTForms Documentations: https://wtforms.readthedocs.io/en/2.3.x/
 
 ## 1. Prerequisites
 ### 1.1 Installation
@@ -87,6 +88,8 @@ Create a SeekHealth account through http://localhost:5800/signup. SingPass Verif
 If you are already a SeekHealth user, sign in through http://localhost:5800/login. 
 	Username: tanxiaohui98
 	Password: tanxiaohui98
+	
+Login_Log.py is listening as an AMQP service and error logs would be recorded in the event of unrecognized credentials to login.
 
 #### 5.1.2 Create an appointment 
 Click on `MAKE AN APPOINTMENT` button.
