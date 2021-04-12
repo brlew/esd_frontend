@@ -18,6 +18,9 @@ Please ensure that you have the following installed on your machine. You can fol
 - Visual Studio Code
 - Docker Desktop
 - WAMP Server
+- Google Chrome
+- Google Chrome Extension Installed with Allow CORS: Access-Control-Allow-Origin 
+ (https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf/related?hl=en)
 
 ### 1.2 Launch
 Make sure that your WAMP Server and Docker is running.
